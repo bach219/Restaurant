@@ -123,7 +123,7 @@
                 <com.quintus.labs.grocerystore.customfonts.MyTextViewMeriendaRegular
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Checkout "
+                    android:text="Thanh toán "
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />

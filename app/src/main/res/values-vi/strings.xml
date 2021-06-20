@@ -1,0 +1,38 @@
+<resources>
+    <!--
+   * Grocery App
+   * https://github.com/quintuslabs/GroceryStore
+   * Created on 18-Feb-2019.
+   * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
+   -->
+    <string name="app_name">Bach Food</string>
+    <string name="navigation_drawer_open">Mở sidebar</string>
+    <string name="navigation_drawer_close">Đóng sidebar</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Tiêu đề điều hướng</string>
+    <string name="action_settings">Cài đặt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email">Địa chỉ Email</string>
+    <string name="passowrd">Mật khẩu</string>
+    <string name="login">ĐĂNG NHẬP</string>
+    <string name="show_pwd">Xem mật khẩu</string>
+    <string name="hide_pwd">Ẩn mật khẩu</string>
+    <string name="forgot">Quên mật khẩu?</string>
+    <string name="closebutton">Close Button for Activity</string>
+    <string name="newUser">Chưa có tài khoản? Đăng ký ở đây.</string>
+    <string name="fullName">Họ và tên</string>
+    <string name="mobileNumber">Số điện thoại</string>
+    <string name="location">Vị trí</string>
+    <string name="confirmPassword">Xác nhận mật khẩu</string>
+    <string name="terms_conditions">Đồng ý với các điều khoản sử dụng.</string>
+    <string name="signUp">ĐĂNG KÝ</string>
+    <string name="already_user">Đã có tài khoản? Đăng nhập ở đây.</string>
+    <string name="registered_emailid">Lấy lại tài khoản với Email này:</string>
+    <string name="submit">Gửi</string>
+    <string name="back">Trở lại</string>
+    <string name="action_Cart">Giỏ hàng</string>
+</resources>

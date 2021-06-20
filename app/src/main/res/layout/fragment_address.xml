@@ -43,7 +43,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Adderss"
+                        android:text="Thông tin"
                         android:textColor="@color/text_color"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -63,7 +63,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment"
+                        android:text="Thanh toán"
                         android:textColor="@color/subtext"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -83,7 +83,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Confirm"
+                        android:text="Xác nhận"
                         android:textColor="@color/subtext"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Full Name"
+                            android:text="Tên giao dịch"
                             android:textSize="14dp" />
 
                         <EditText
@@ -128,7 +128,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@android:color/transparent"
                             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."
-                            android:hint="Name"
+                            android:hint="Nguyễn Văn A"
                             android:inputType="textPersonName"
                             android:textColor="@color/black"
                             android:textColorHint="@color/borderColor"
@@ -151,7 +151,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Email Address"
+                            android:text="Địa chỉ Email"
                             android:textSize="14dp" />
 
                         <EditText
@@ -163,7 +163,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@android:color/transparent"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_@.0123456789"
-                            android:hint="Email"
+                            android:hint="abc@email.com"
                             android:inputType="textEmailAddress"
                             android:textColor="@color/black"
                             android:textColorHint="@color/borderColor"
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Mobile Number"
+                            android:text="Số điện thoại"
                             android:textSize="14dp" />
 
                         <EditText
@@ -198,7 +198,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@android:color/transparent"
                             android:digits="0123456789"
-                            android:hint="mobile"
+                            android:hint="0123456789"
                             android:inputType="number"
                             android:maxLength="10"
                             android:textColor="@color/black"
@@ -222,7 +222,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="Address"
+                            android:text="Địa chỉ"
                             android:textSize="14dp" />
 
                         <EditText
@@ -234,7 +234,7 @@
                             android:layout_marginBottom="10dp"
                             android:background="@android:color/transparent"
                             android:gravity="bottom"
-                            android:hint="House No. / Street No."
+                            android:hint="Số nhà / Tên đường."
                             android:inputType="textPostalAddress"
                             android:textColor="@color/black"
                             android:textColorHint="@color/borderColor"
@@ -384,7 +384,7 @@
                         android:background="@color/colorPrimary"
                         android:elevation="5dp"
                         android:gravity="center"
-                        android:text="Save"
+                        android:text="Lưu"
                         android:textColor="@color/white"
                         android:textSize="18dp" />
 

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,6 +47,14 @@ public class CheckoutActivity extends BaseActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.check_out_menu, menu);
+        MenuItem set = menu.findItem(R.id.action_settings);
+        set.setVisible(true);
+        return true;
+    }
 
     private void changeActionBarTitle(ActionBar actionBar) {
         // Create a LayoutParams for TextView
@@ -58,7 +67,7 @@ public class CheckoutActivity extends BaseActivity {
         tv.setGravity(Gravity.CENTER);
         //tv.setTypeface(null, Typeface.BOLD);
         // Set text to display in TextView
-        tv.setText("Checkout"); // ActionBar title text
+        tv.setText("Thanh toán"); // ActionBar title text
         Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Merienda-Bold.ttf");
         tv.setTypeface(tf);
         tv.setTextSize(20);

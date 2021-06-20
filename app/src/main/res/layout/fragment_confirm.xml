@@ -44,7 +44,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Adderss"
+                        android:text="Thông tin"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -64,7 +64,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment"
+                        android:text="Thanh toán"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -84,7 +84,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Confirm"
+                        android:text="Xác nhận"
                         android:textColor="@color/text_color"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -141,7 +141,7 @@
                                 <com.quintus.labs.grocerystore.customfonts.MyTextViewMeriendaRegular
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Total : "
+                                    android:text="Tổng : "
                                     android:textSize="18dp"
                                     android:textStyle="bold" />
 
@@ -179,7 +179,7 @@
                                 <com.quintus.labs.grocerystore.customfonts.MyTextViewMeriendaRegular
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Shipping : "
+                                    android:text="Phí giao hàng : "
                                     android:textSize="18dp"
                                     android:textStyle="bold" />
 
@@ -224,7 +224,7 @@
                                 <com.quintus.labs.grocerystore.customfonts.MyTextViewMeriendaRegular
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Total Amount : "
+                                    android:text="Tổng cộng : "
                                     android:textSize="18dp"
                                     android:textStyle="bold" />
 

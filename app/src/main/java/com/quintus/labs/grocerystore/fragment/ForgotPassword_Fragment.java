@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +37,8 @@ public class ForgotPassword_Fragment extends Fragment implements
 
     private static EditText emailId;
     private static TextView submit, back;
-
+    private static LinearLayout forgotPassLayout;
+    private static Animation shakeAnimation;
     public ForgotPassword_Fragment() {
 
     }
@@ -54,7 +58,10 @@ public class ForgotPassword_Fragment extends Fragment implements
         emailId = view.findViewById(R.id.registered_emailid);
         submit = view.findViewById(R.id.forgot_button);
         back = view.findViewById(R.id.backToLoginBtn);
-
+        forgotPassLayout = view.findViewById(R.id.forgot_password_layout);
+        // Load ShakeAnimation
+        shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.shake);
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
@@ -104,19 +111,21 @@ public class ForgotPassword_Fragment extends Fragment implements
         Matcher m = p.matcher(getEmailId);
 
         // First check if email id is not null else show error toast
-        if (getEmailId.equals("") || getEmailId.length() == 0)
-
+        if (getEmailId.equals("") || getEmailId.length() == 0) {
+            forgotPassLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Please enter your Email Id.");
-
-            // Check if email id is valid or not
+                    "Hãy nhập địa chỉ Email muốn lấy lại.");
+            vibrate(200);
+            emailid.setError("Địa chỉ Email bị bỏ trống");
+            emailid.requestFocus();
+        }    // Check if email id is valid or not
         else if (!m.find())
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Your Email Id is Invalid.");
+                    "Địa chỉ Email không tồn tại.");
 
             // Else submit email id and fetch passwod or do your stuff
         else
-            Toast.makeText(getActivity(), "Get Forgot Password.",
+            Toast.makeText(getActivity(), "Lấy mật khẩu đã quên.",
                     Toast.LENGTH_SHORT).show();
     }
 }

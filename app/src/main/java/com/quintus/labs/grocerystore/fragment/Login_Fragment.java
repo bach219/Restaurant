@@ -195,12 +195,28 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         Matcher m = p.matcher(getEmailId);
 
         // Check for both field is empty or not
-        if (getEmailId.equals("") || getEmailId.length() == 0
-                || getPassword.equals("") || getPassword.length() == 0) {
+//        if (getEmailId.equals("") || getEmailId.length() == 0
+//                || getPassword.equals("") || getPassword.length() == 0) {
+//            loginLayout.startAnimation(shakeAnimation);
+//            new CustomToast().Show_Toast(getActivity(), view,
+//                    "Enter both credentials.");
+//            vibrate(200);
+//        }
+        if (getEmailId.equals("") || getEmailId.length() == 0) {
             loginLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Enter both credentials.");
+                    "Hãy nhâp địa chỉ Email.");
             vibrate(200);
+            emailid.setError("Địa chỉ Email bị bỏ trống");
+            emailid.requestFocus();
+        }
+        else if (getPassword.equals("") || getPassword.length() == 0) {
+            loginLayout.startAnimation(shakeAnimation);
+            new CustomToast().Show_Toast(getActivity(), view,
+                    "Hãy nhâp mật khẩu.");
+            vibrate(200);
+            password.setError("Mật khẩu bị bỏ trống");
+            password.requestFocus();
         }
         // Check if email id is valid or not
         else if (!m.find()) {
@@ -210,7 +226,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             // Else do login and do your stuff
         } else {
 
-            progressDialog.setMessage("Please Wait....");
+            progressDialog.setMessage("Vui lòng đợi....");
             progressDialog.show();
 
             Handler mHand = new Handler();
@@ -219,17 +235,21 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 @Override
                 public void run() {
                     if (user != null) {
-                        if (!user.getEmail().equalsIgnoreCase(getEmailId) || !user.getPassword().equalsIgnoreCase(getPassword)) {
+                        if (!user.getEmail().equals(getEmailId)) {
                             new CustomToast().Show_Toast(getActivity(), view,
-                                    "Please Check Email or Password");
-                        } else {
+                                    "Hãy kiểm tra lại địa chỉ Email");
+                        }else if (!user.getPassword().equals(getPassword)) {
+                            new CustomToast().Show_Toast(getActivity(), view,
+                                    "Hãy kiểm tra lại mật khẩu");
+                        }
+                        else {
                             startActivity(new Intent(getActivity(), MainActivity.class));
                             getActivity().finish();
                             getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                         }
                     } else {
                         new CustomToast().Show_Toast(getActivity(), view,
-                                "Please Register whith This Email");
+                                "Địa chỉ Email này không tồn tại");
                     }
 
                     progressDialog.dismiss();

@@ -79,10 +79,13 @@ public class CartActivity extends BaseActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.cart_menu, menu);
         MenuItem item = menu.findItem(R.id.cart_delete);
+        MenuItem set = menu.findItem(R.id.action_settings);
         if (mState.equalsIgnoreCase("HIDE_MENU")) {
             item.setVisible(false);
+            set.setVisible(true);
         } else {
             item.setVisible(true);
+            set.setVisible(false);
         }
         return true;
     }
@@ -156,7 +159,7 @@ public class CartActivity extends BaseActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setTypeface(null, Typeface.BOLD);
         // Set text to display in TextView
-        tv.setText("Cart"); // ActionBar title text
+        tv.setText("Giỏ hàng"); // ActionBar title text
         tv.setTextSize(20);
 
         // Set the text color of TextView to red
