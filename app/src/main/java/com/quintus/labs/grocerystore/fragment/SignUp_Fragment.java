@@ -123,33 +123,33 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
 
         if (getFullName.length() == 0) {
-            fullName.setError("Eneter Your Name");
+            fullName.setError("Tên đăng nhập bị bỏ trống");
             fullName.requestFocus();
         } else if (getEmailId.length() == 0) {
-            emailId.setError("Eneter Your Email");
+            emailId.setError("Địa chỉ Email bị bỏ trống");
             emailId.requestFocus();
         } else if (!m.find()) {
-            emailId.setError("Eneter Correct Email");
+            emailId.setError("Địa chỉ Email không đúng định dạng");
             emailId.requestFocus();
         } else if (getMobileNumber.length() == 0) {
-            mobileNumber.setError("Eneter Your Mobile Number");
+            mobileNumber.setError("Số điện thoại bị bổ trống");
             mobileNumber.requestFocus();
         } else if (getPassword.length() == 0) {
-            password.setError("Eneter Password");
+            password.setError("Mật khẩu bị bỏ trống");
             password.requestFocus();
         } else if (getPassword.length() < 6) {
-            password.setError("Eneter 6 digit Password");
+            password.setError("Mật khẩu phải chứa ít nhất 6 kí tự");
             password.requestFocus();
         } else if (!terms_conditions.isChecked()) {
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Accept Term & Conditions");
+                    "Chấp nhận các điều khoản sử dụng");
         } else {
             user = new User("1", getFullName, getEmailId, getMobileNumber, getPassword);
             gson = new Gson();
             String userString = gson.toJson(user);
             localStorage = new LocalStorage(getContext());
             localStorage.createUserLoginSession(userString);
-            progressDialog.setMessage("Registering Data....");
+            progressDialog.setMessage("Đang đăng ký tài khoản....");
             progressDialog.show();
             Handler mHand = new Handler();
             mHand.postDelayed(new Runnable() {

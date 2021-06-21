@@ -1,9 +1,11 @@
 package com.quintus.labs.grocerystore.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -116,8 +118,8 @@ public class ForgotPassword_Fragment extends Fragment implements
             new CustomToast().Show_Toast(getActivity(), view,
                     "Hãy nhập địa chỉ Email muốn lấy lại.");
             vibrate(200);
-            emailid.setError("Địa chỉ Email bị bỏ trống");
-            emailid.requestFocus();
+            emailId.setError("Địa chỉ Email bị bỏ trống");
+            emailId.requestFocus();
         }    // Check if email id is valid or not
         else if (!m.find())
             new CustomToast().Show_Toast(getActivity(), view,
@@ -127,5 +129,10 @@ public class ForgotPassword_Fragment extends Fragment implements
         else
             Toast.makeText(getActivity(), "Lấy mật khẩu đã quên.",
                     Toast.LENGTH_SHORT).show();
+    }
+
+    public void vibrate(int duration) {
+        Vibrator vibs = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vibs.vibrate(duration);
     }
 }
