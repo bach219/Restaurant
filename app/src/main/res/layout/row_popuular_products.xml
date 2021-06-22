@@ -84,16 +84,6 @@
                         android:text="-"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/product_currency"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="5dp"
-                        android:text="Rs."
-                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/product_price"
@@ -104,6 +94,16 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="1dp"
                         android:text="12"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/product_currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="Rs."
                         android:textSize="16dp" />
 
                 </LinearLayout>
@@ -123,7 +123,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/shop_button_bg"
                         android:padding="10dp"
-                        android:text="shop Now"
+                        android:text="Đặt"
                         android:textColor="@color/gen_white" />
 
                     <LinearLayout

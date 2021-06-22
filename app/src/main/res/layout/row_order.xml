@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
-                    android:text="pending" />
+                    android:text="Đang xử lý" />
 
 
             </LinearLayout>

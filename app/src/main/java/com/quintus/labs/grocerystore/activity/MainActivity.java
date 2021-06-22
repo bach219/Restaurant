@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity
                 break;
 
             case R.id.nav_offers:
-                fragment = new OffrersFragment();
+//                fragment = new OffrersFragment();
                 break;
             case R.id.nav_search:
                 //fragment = new CategoryFragment();

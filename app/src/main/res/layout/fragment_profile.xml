@@ -83,13 +83,13 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name :" />
+                        android:text="Tên :" />
 
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansRegular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Santosh Kumar Dash" />
+                        android:text="Nguyễn Bachs" />
                 </LinearLayout>
 
                 <View
@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="santoshnet2016@gmail.com" />
+                        android:text="nguyenvanbach579@gmail.com" />
                 </LinearLayout>
 
                 <View
@@ -129,7 +129,7 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mobile :" />
+                        android:text="Số điện thoại :" />
 
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansRegular
                         android:layout_width="wrap_content"
@@ -152,13 +152,13 @@
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansBold
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address :" />
+                        android:text="Địa chỉ :" />
 
                     <com.quintus.labs.grocerystore.customfonts.MyTextViewSansRegular
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="Banglore" />
+                        android:text="Hà Nội" />
                 </LinearLayout>
 
                 <View

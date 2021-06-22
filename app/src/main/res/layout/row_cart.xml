@@ -77,14 +77,6 @@
                         android:text="="
                         android:textSize="18dp" />
 
-                    <TextView
-                        android:id="@+id/product_currency"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_3dp"
-                        android:layout_marginRight="@dimen/margin_3dp"
-                        android:text="Rs."
-                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/sub_total"
@@ -95,6 +87,14 @@
                         android:text="500"
                         android:textSize="20dp" />
 
+                    <TextView
+                        android:id="@+id/product_currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_3dp"
+                        android:layout_marginRight="@dimen/margin_3dp"
+                        android:text="Rs."
+                        android:textSize="18dp" />
 
                 </LinearLayout>
 

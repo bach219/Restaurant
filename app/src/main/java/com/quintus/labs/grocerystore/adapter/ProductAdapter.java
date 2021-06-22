@@ -168,7 +168,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                             _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
-                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + "= Rs." + _subtotal);
+                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + " = " + _subtotal + " VNĐ");
                             String cartStr = gson.toJson(cartList);
                             //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
