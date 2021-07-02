@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.adapter.ViewPagerAdapter;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
+import com.quintus.labs.grocerystore.activity.MenuActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;

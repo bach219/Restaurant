@@ -32,6 +32,7 @@ import com.quintus.labs.grocerystore.fragment.NewProductFragment;
 import com.quintus.labs.grocerystore.fragment.OffrersFragment;
 import com.quintus.labs.grocerystore.fragment.PopularProductFragment;
 import com.quintus.labs.grocerystore.fragment.ProfileFragment;
+import com.quintus.labs.grocerystore.fragment.MenuFragment;
 import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
@@ -166,7 +167,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        displaySelectedScreen(R.id.nav_home);
+        displaySelectedScreen(100);
     }
 
     private void displaySelectedScreen(int itemId) {
@@ -177,10 +178,10 @@ public class MainActivity extends BaseActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
-                fragment = new HomeFragment();
+                fragment = new MenuFragment();
                 break;
             case R.id.nav_profile:
-//                fragment = new ProfileFragment();
+                fragment = new ProfileFragment();
                 break;
             case R.id.nav_category:
                 fragment = new CategoryFragment();
@@ -206,7 +207,9 @@ public class MainActivity extends BaseActivity
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
 
-
+            default:
+                fragment = new MenuFragment();
+                break;
         }
 
         //replacing the fragment

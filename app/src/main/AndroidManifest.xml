@@ -29,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.MenuActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -42,7 +46,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.CheckoutActivity" />
-        <activity android:name=".activity.ProductViewActivity"></activity>
+        <activity android:name=".activity.ProductViewActivity" />
     </application>
 
 </manifest>
