@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.MainActivity;
 import com.quintus.labs.grocerystore.activity.MenuActivity;
@@ -39,9 +40,15 @@ import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.Utils;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.quintus.labs.grocerystore.retrofit.*;
 /**
  * Grocery App
  * https://github.com/quintuslabs/GroceryStore
@@ -85,7 +92,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         password = view.findViewById(R.id.login_password);
         loginButton = view.findViewById(R.id.loginBtn);
         forgotPassword = view.findViewById(R.id.forgot_password);
-        signUp = view.findViewById(R.id.createAccount);
+//        signUp = view.findViewById(R.id.createAccount);
         show_hide_password = view
                 .findViewById(R.id.show_hide_password);
         loginLayout = view.findViewById(R.id.login_layout);
@@ -108,7 +115,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             forgotPassword.setTextColor(csl);
             show_hide_password.setTextColor(csl);
-            signUp.setTextColor(csl);
+//            signUp.setTextColor(csl);
         } catch (Exception e) {
         }
     }
@@ -117,7 +124,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private void setListeners() {
         loginButton.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
-        signUp.setOnClickListener(this);
+//        signUp.setOnClickListener(this);
 
         // Set check listener over checkbox for showing and hiding password
         show_hide_password
@@ -171,15 +178,15 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                 new ForgotPassword_Fragment(),
                                 Utils.ForgotPassword_Fragment).commit();
                 break;
-            case R.id.createAccount:
-
-                // Replace signup frgament with animation
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new SignUp_Fragment(),
-                                Utils.SignUp_Fragment).commit();
-                break;
+//            case R.id.createAccount:
+//
+//                // Replace signup frgament with animation
+//                fragmentManager
+//                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+//                        .replace(R.id.frameContainer, new SignUp_Fragment(),
+//                                Utils.SignUp_Fragment).commit();
+//                break;
         }
 
     }
@@ -222,7 +229,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         // Check if email id is valid or not
         else if (!m.find()) {
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Địa chỉ Email không tồn tại.");
+                    "Địa chỉ Email sai định dạng.");
             vibrate(200);
             // Else do login and do your stuff
         } else {
@@ -235,23 +242,57 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                 @Override
                 public void run() {
-                    if (user != null) {
-                        if (!user.getEmail().equals(getEmailId)) {
-                            new CustomToast().Show_Toast(getActivity(), view,
-                                    "Hãy kiểm tra lại địa chỉ Email");
-                        }else if (!user.getPassword().equals(getPassword)) {
-                            new CustomToast().Show_Toast(getActivity(), view,
-                                    "Hãy kiểm tra lại mật khẩu");
+//                    if (user != null) {
+//                        if (!user.getEmail().equals(getEmailId)) {
+//                            new CustomToast().Show_Toast(getActivity(), view,
+//                                    "Hãy kiểm tra lại địa chỉ Email");
+//                        }else if (!user.getPassword().equals(getPassword)) {
+//                            new CustomToast().Show_Toast(getActivity(), view,
+//                                    "Hãy kiểm tra lại mật khẩu");
+//                        }
+//                        else {
+//                            startActivity(new Intent(getActivity(), MainActivity.class));
+//                            getActivity().finish();
+//                            getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+//                        }
+//                    } else {
+//                        new CustomToast().Show_Toast(getActivity(), view,
+//                                "Địa chỉ Email này không tồn tại");
+//                    }
+
+                    APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                    Call<JsonObject> callUser = apiInterface.login(getEmailId,getPassword);
+                    callUser.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if(response.code() == 200){
+                                String jsonString = response.body().toString();
+                                Gson gson = new Gson();
+                                User u = gson.fromJson(jsonString, User.class);
+                                localStorage = new LocalStorage(getContext());
+                                localStorage.createUserLoginSession(gson.toJson(u));
+//                                new CustomToast().Show_Toast(getActivity(), view,
+//                                        "Đăng nhập thành công");
+                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                getActivity().finish();
+                                getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                            }
+                            if(response.code() == 301)
+                                new CustomToast().Show_Toast(getActivity(), view,
+                                        "Địa chỉ Email không tồn tại");
+                            if(response.code() == 401)
+                                new CustomToast().Show_Toast(getActivity(), view,
+                                        "Mật khẩu chưa đúng");
+//                            Log.i("test", response.body().toString());
                         }
-                        else {
-                            startActivity(new Intent(getActivity(), MainActivity.class));
-                            getActivity().finish();
-                            getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            Log.e("test", call.toString());
+                            Log.e("test", t.toString());
+                            call.cancel();
                         }
-                    } else {
-                        new CustomToast().Show_Toast(getActivity(), view,
-                                "Địa chỉ Email này không tồn tại");
-                    }
+                    });
 
                     progressDialog.dismiss();
 

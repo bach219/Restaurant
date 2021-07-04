@@ -72,7 +72,8 @@
                     android:layout_margin="20dp"
                     android:src="@drawable/no_image"
                     app:civ_border_color="@color/gray_btn_bg_color"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_width="2dp"
+                    android:id="@+id/imageProfile"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,7 +90,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Nguyễn Bachs" />
+                        android:text="Nguyễn Bachs"
+                        android:id="@+id/name_profile"/>
                 </LinearLayout>
 
                 <View
@@ -112,7 +114,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="nguyenvanbach579@gmail.com" />
+                        android:text="nguyenvanbach579@gmail.com"
+                        android:id="@+id/email_profile" />
                 </LinearLayout>
 
                 <View
@@ -135,7 +138,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="9778178337" />
+                        android:text="9778178337"
+                        android:id="@+id/phone_profile"/>
                 </LinearLayout>
 
                 <View
@@ -158,14 +162,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="Hà Nội" />
+                        android:text="Hà Nội"
+                        android:id="@+id/address_profile"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/cardBorderColor" />
-
+                <TextView
+                    android:id="@+id/openUpdateProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/margin_20dp"
+                    android:background="@color/colorPrimary"
+                    android:elevation="5dp"
+                    android:gravity="center"
+                    android:text="Chỉnh sửa"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

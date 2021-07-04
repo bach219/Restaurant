@@ -9,7 +9,7 @@
     android:id="@+id/toast_root"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/color_spicy"
     android:padding="5dp">
 
     <TextView
@@ -21,7 +21,7 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp" />
 
 </RelativeLayout>

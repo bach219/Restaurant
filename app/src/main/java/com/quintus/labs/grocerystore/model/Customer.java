@@ -6,7 +6,7 @@ package com.quintus.labs.grocerystore.model;
  * Created on 18-Feb-2019.
  * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
  */
-public class UserAddress {
+public class Customer {
     String id;
     String name;
     String email;
@@ -16,7 +16,7 @@ public class UserAddress {
     String city;
     String zip;
 
-    public UserAddress(String name, String email, String mobile, String address, String state, String city, String zip) {
+    public Customer(String name, String email, String mobile, String address, String state, String city, String zip) {
         this.name = name;
         this.email = email;
         this.mobile = mobile;

@@ -1,11 +1,14 @@
 package com.quintus.labs.grocerystore.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,13 +22,20 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.LoginRegisterActivity;
+import com.quintus.labs.grocerystore.retrofit.APIClient;
+import com.quintus.labs.grocerystore.retrofit.APIInterface;
 import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Grocery App
@@ -41,6 +51,7 @@ public class ForgotPassword_Fragment extends Fragment implements
     private static TextView submit, back;
     private static LinearLayout forgotPassLayout;
     private static Animation shakeAnimation;
+    ProgressDialog progressDialog;
     public ForgotPassword_Fragment() {
 
     }
@@ -60,6 +71,7 @@ public class ForgotPassword_Fragment extends Fragment implements
         emailId = view.findViewById(R.id.registered_emailid);
         submit = view.findViewById(R.id.forgot_button);
         back = view.findViewById(R.id.backToLoginBtn);
+        progressDialog = new ProgressDialog(getContext());
         forgotPassLayout = view.findViewById(R.id.forgot_password_layout);
         // Load ShakeAnimation
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
@@ -123,12 +135,52 @@ public class ForgotPassword_Fragment extends Fragment implements
         }    // Check if email id is valid or not
         else if (!m.find())
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Địa chỉ Email không tồn tại.");
+                    "Địa chỉ Email không đúng định dạng.");
 
             // Else submit email id and fetch passwod or do your stuff
-        else
-            Toast.makeText(getActivity(), "Lấy mật khẩu đã quên.",
-                    Toast.LENGTH_SHORT).show();
+        else{
+            progressDialog.setMessage("Vui lòng đợi....");
+            progressDialog.show();
+
+            Handler mHand = new Handler();
+            mHand.postDelayed(new Runnable() {
+              @Override
+              public void run() {
+
+                  checkValidation(emailId.getText().toString());
+                  progressDialog.dismiss();
+              }
+            }, 7000);
+//            Toast.makeText(getActivity(), "Lấy mật khẩu đã quên.",
+//                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void checkValidation(String mail){
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<JsonObject> callUser = apiInterface.forgot(mail);
+        callUser.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code() == 200) {
+                    Toast.makeText(getActivity(), "Mật khẩu mới đã được gửi trong Email!", Toast.LENGTH_LONG).show();
+//                            new CustomToast().Show_Toast(getActivity(), view,
+//                                    "Cập nhật dữ liệu thành công!");
+                    vibrate(200);
+                }
+                if(response.code() == 401)
+                    new CustomToast().Show_Toast(getActivity(), view,
+                            "Địa chỉ Email không tồn tại");
+//                            Toast.makeText(getActivity(), "Địa chỉ Email đã tồn tại!", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("test", call.toString());
+                Log.e("test", t.toString());
+                call.cancel();
+            }
+        });
     }
 
     public void vibrate(int duration) {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,20 +25,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.fragment.CategoryFragment;
-import com.quintus.labs.grocerystore.fragment.HomeFragment;
+import com.quintus.labs.grocerystore.fragment.MenuFragment;
 import com.quintus.labs.grocerystore.fragment.MyOrderFragment;
 import com.quintus.labs.grocerystore.fragment.NewProductFragment;
-import com.quintus.labs.grocerystore.fragment.OffrersFragment;
 import com.quintus.labs.grocerystore.fragment.PopularProductFragment;
 import com.quintus.labs.grocerystore.fragment.ProfileFragment;
-import com.quintus.labs.grocerystore.fragment.MenuFragment;
 import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.model.User;
+import com.quintus.labs.grocerystore.retrofit.APIClient;
+import com.quintus.labs.grocerystore.retrofit.APIInterface;
+import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Grocery App
@@ -159,11 +166,29 @@ public class MainActivity extends BaseActivity
         nav_footer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                localStorage.logoutUser();
-                startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
-                finish();
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-                // Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+//                Log.e("test", user.getAccess_token());
+                Call<JsonObject> callUser = apiInterface.logout("Bearer " + user.getAccess_token());
+                callUser.enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if(response.code() == 200){
+
+                            localStorage.logoutUser();
+                            startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
+                            finish();
+                            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        Log.e("test", call.toString());
+                        Log.e("test", t.toString());
+                        call.cancel();
+                    }
+                });
             }
         });
 

@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.gson.Gson;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.model.User;
-import com.quintus.labs.grocerystore.model.UserAddress;
+import com.quintus.labs.grocerystore.model.Customer;
 import com.quintus.labs.grocerystore.util.Utils;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 
@@ -52,7 +52,7 @@ public class AddressFragment extends Fragment {
     ArrayList<String> stringArrayCity;
     String spinnerStateValue, _city, _name, _email, _mobile, _address, _state, _zip, userString;
     EditText name, email, mobile, address, state, zip;
-    UserAddress userAddress;
+    Customer customer;
     LocalStorage localStorage;
     Gson gson;
 
@@ -78,21 +78,21 @@ public class AddressFragment extends Fragment {
         gson = new Gson();
         userString = localStorage.getUserLogin();
         User user = gson.fromJson(userString, User.class);
-        userAddress = gson.fromJson(localStorage.getUserAddress(), UserAddress.class);
+        customer = gson.fromJson(localStorage.getUserAddress(), Customer.class);
         Log.d("User String : ", userString);
         if (user != null) {
-            name.setText(user.getName());
-            email.setText(user.getEmail());
-            mobile.setText(user.getMobile());
+            name.setText("user.getName()");
+            email.setText("user.getEmail()");
+            mobile.setText("user.getMobile()");
         }
 
 
-        if (userAddress != null) {
-            name.setText(userAddress.getName());
-            email.setText(userAddress.getEmail());
-            mobile.setText(userAddress.getMobile());
-            address.setText(userAddress.getAddress());
-            zip.setText(userAddress.getZip());
+        if (customer != null) {
+            name.setText("customer.getName()");
+            email.setText("customer.getEmail()");
+            mobile.setText("customer.getMobile()");
+            address.setText("customer.getAddress()");
+            zip.setText("customer.getZip()");
 
         }
 
@@ -135,8 +135,8 @@ public class AddressFragment extends Fragment {
                     zip.setError("Enter your Zip Code");
                     zip.requestFocus();
                 } else {
-                    userAddress = new UserAddress(_name, _email, _mobile, _address, _state, _city, _zip);
-                    String user_address = gson.toJson(userAddress);
+                    customer = new Customer(_name, _email, _mobile, _address, _state, _city, _zip);
+                    String user_address = gson.toJson(customer);
                     localStorage.setUserAddress(user_address);
 
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -159,8 +159,8 @@ public class AddressFragment extends Fragment {
         final ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(getActivity(), R.layout.spinnertextview, stringArrayCity);
         adapterCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapterCity);
-        if (userAddress != null) {
-            int selectionPosition1 = adapterCity.getPosition(userAddress.getCity());
+        if (customer != null) {
+            int selectionPosition1 = adapterCity.getPosition(customer.getCity());
             citySpinner.setSelection(selectionPosition1);
         }
 
@@ -184,8 +184,8 @@ public class AddressFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinnertextview, stringArrayState);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(adapter);
-        if (userAddress != null) {
-            int selectionPosition = adapter.getPosition(userAddress.getState());
+        if (customer != null) {
+            int selectionPosition = adapter.getPosition(customer.getState());
             stateSpinner.setSelection(selectionPosition);
         }
 

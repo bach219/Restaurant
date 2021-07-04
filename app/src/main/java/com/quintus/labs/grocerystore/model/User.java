@@ -1,5 +1,7 @@
 package com.quintus.labs.grocerystore.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 /**
  * Grocery App
  * https://github.com/quintuslabs/GroceryStore
@@ -7,22 +9,65 @@ package com.quintus.labs.grocerystore.model;
  * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
  */
 public class User {
+    @SerializedName("id")
+    @Expose
     String id;
+    @SerializedName("name")
+    @Expose
     String name;
+    @SerializedName("email")
+    @Expose
     String email;
-    String mobile;
+    @SerializedName("phone")
+    @Expose
+    String phone;
+    @SerializedName("address")
+    @Expose
+    String address;
+    @SerializedName("photo")
+    @Expose
+    String photo;
+    @SerializedName("password")
+    @Expose
     String password;
+    @SerializedName("access_token")
+    @Expose
+    String access_token;
+
 
     public User() {
     }
 
-    public User(String id, String name, String email, String mobile, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.password = password;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", photo='" + photo + '\'' +
+                ", password='" + password + '\'' +
+                ", access_token='" + access_token + '\'' +
+                '}';
     }
+
+    //    public User(String id, String name, String email, String mobile, String password) {
+//        this.id = id;
+//        this.name = name;
+//        this.email = email;
+//        this.mobile = mobile;
+//        this.password = password;
+//    }
+//
+//    public User(String id, String name, String email, String mobile, String photo, String password) {
+//        this.id = id;
+//        this.name = name;
+//        this.email = email;
+//        this.mobile = mobile;
+//        this.photo = photo;
+//        this.password = password;
+//    }
 
     public String getId() {
         return id;
@@ -48,12 +93,20 @@ public class User {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPassword() {
@@ -64,5 +117,19 @@ public class User {
         this.password = password;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
 
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
 }

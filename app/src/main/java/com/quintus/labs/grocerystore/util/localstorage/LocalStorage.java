@@ -27,6 +27,7 @@ public class LocalStorage {
     public static final String FAVORITE_CATEGORY = "fav_category";
 
     private static final String IS_USER_LOGIN = "IsUserLoggedIn";
+    private static final String ACCESS_TOKEN = "token";
 
 
     private static LocalStorage instance = null;
@@ -64,6 +65,7 @@ public class LocalStorage {
 
     public void logoutUser() {
         editor = sharedPreferences.edit();
+        editor.putBoolean(IS_USER_LOGIN, false);
         editor.clear();
         editor.commit();
     }
