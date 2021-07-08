@@ -74,6 +74,8 @@ public class ProfileFragment extends Fragment {
         phone.setText(user.getPhone());
         MyTextViewSansRegular address = view.findViewById(R.id.address_profile);
         address.setText(user.getAddress());
+        MyTextViewSansRegular position = view.findViewById(R.id.position_profile);
+        position.setText(user.getPosition());
 
         TextView update = view.findViewById(R.id.openUpdateProfile);
         update.setOnClickListener(new View.OnClickListener() {

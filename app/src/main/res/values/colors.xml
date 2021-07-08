@@ -8,7 +8,7 @@
 <resources>
 <!--    <color name="colorPrimary">#FA5258</color>-->
 <!--    <color name="colorPrimaryDark">#FAD23C</color>-->
-
+    <color name="background">#4f000000</color>
 
     <color name="colorPrimary">#DB8E4D</color>
     <color name="colorPrimaryDark">#DBCC8F</color>

@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".activity.WelcomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -29,10 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.MenuActivity"
+        <activity
+            android:name=".activity.MenuActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -47,6 +48,20 @@
         <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.CheckoutActivity" />
         <activity android:name=".activity.ProductViewActivity" />
+
+
+        <activity
+            android:name=".activity.CalendarViewWithNotesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.CreateEventActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.SelectDateAndTimeActivity"
+            android:theme="@style/AppTheme.NoActionBar.Transition">
+        </activity>
     </application>
 
 </manifest>

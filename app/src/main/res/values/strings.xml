@@ -35,4 +35,18 @@
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
     <string name="action_Cart">Cart</string>
+
+    <string name="today">Hôm nay</string>
+    <string name="cancel">Hủy</string>
+    <string name="ok">Ok</string>
+    <string name="new_event">Sự kiện mới</string>
+    <string name="save">Lưu</string>
+    <string name="title">Tiêu đề</string>
+    <string name="completed">Đã xong</string>
+    <string name="set">Lưu</string>
+    <string name="double_dots" translatable="false">:</string>
+    <string name="select_color_instruction">Chọn màu</string>
+    <string name="event_default_title">Sự kiện</string>
+    <string name="no_events">Trống</string>
+    <string name="delete">Xóa</string>
 </resources>

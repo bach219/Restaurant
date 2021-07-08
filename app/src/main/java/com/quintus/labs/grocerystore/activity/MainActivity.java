@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -37,11 +38,14 @@ import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.retrofit.APIClient;
 import com.quintus.labs.grocerystore.retrofit.APIInterface;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,9 +82,12 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.slide_to_left, R.anim.slide_from_right);
+        ft.replace(R.id.content_frame, new MenuFragment());
+        ft.commit();
     }
 
 
@@ -158,6 +165,11 @@ public class MainActivity extends BaseActivity
         navigationView.setNavigationItemSelectedListener(this);
         View hView = navigationView.getHeaderView(0);
 
+        CircleImageView img = hView.findViewById(R.id.imageView);
+        Picasso.get()
+                .load(Host.host + user.getPhoto())
+                .placeholder(R.drawable.no_image).error(R.drawable.no_image)
+                .into(img);
         TextView nav_user = hView.findViewById(R.id.nav_header_name);
         LinearLayout nav_footer = findViewById(R.id.footer_text);
         if (user != null) {
@@ -172,20 +184,20 @@ public class MainActivity extends BaseActivity
                 callUser.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        if(response.code() == 200){
-
                             localStorage.logoutUser();
                             startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
                             finish();
                             overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-                        }
-
                     }
 
                     @Override
                     public void onFailure(Call<JsonObject> call, Throwable t) {
                         Log.e("test", call.toString());
                         Log.e("test", t.toString());
+                        localStorage.logoutUser();
+                        startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
+                        finish();
+                        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                         call.cancel();
                     }
                 });

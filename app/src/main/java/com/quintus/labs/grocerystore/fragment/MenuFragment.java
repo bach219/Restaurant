@@ -2,27 +2,29 @@ package com.quintus.labs.grocerystore.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import com.quintus.labs.grocerystore.R;
-import com.quintus.labs.grocerystore.activity.MainActivity;
-import com.quintus.labs.grocerystore.fragment.HomeFragment;
-import com.quintus.labs.grocerystore.fragment.MyOrderFragment;
-import com.quintus.labs.grocerystore.fragment.ProfileFragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.quintus.labs.grocerystore.util.CustomToast;
+import com.google.gson.Gson;
+import com.quintus.labs.grocerystore.R;
+import com.quintus.labs.grocerystore.activity.CalendarViewWithNotesActivity;
+import com.quintus.labs.grocerystore.model.User;
+import com.quintus.labs.grocerystore.retrofit.Host;
+import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MenuFragment#newInstance} factory method to
@@ -48,11 +50,26 @@ public class MenuFragment extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Trang chủ");
 
+        LocalStorage localStorage = new LocalStorage(getContext());
+        String userString = localStorage.getUserLogin();
+        Gson gson = new Gson();
+        User user = gson.fromJson(userString, User.class);
+
 //        Fragment fragment = null;
         CardView mainOrder = view.findViewById(R.id.mainOrder);
         CardView processOrder = view.findViewById(R.id.processOrder);
         CardView attendance = view.findViewById(R.id.attendance);
         CardView profile = view.findViewById(R.id.profile);
+
+        CircleImageView img = view.findViewById(R.id.user_photo);
+        Picasso.get()
+                .load(Host.host + user.getPhoto())
+                .placeholder(R.drawable.no_image).error(R.drawable.no_image)
+                .into(img);
+        TextView user_name = view.findViewById(R.id.user_name);
+        user_name.setText(user.getName());
+        TextView user_position = view.findViewById(R.id.user_position);
+        user_position.setText(user.getPosition());
 
         mainOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +90,10 @@ public class MenuFragment extends Fragment {
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(new HomeFragment());
+//                changeFragment(new HomeFragment());
+//                startActivity(CalendarViewWithNotesActivitySDK21.makeIntent(getActivity()));
+                startActivity(new Intent(getActivity(), CalendarViewWithNotesActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 
@@ -91,5 +111,16 @@ public class MenuFragment extends Fragment {
         ft.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left);
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }

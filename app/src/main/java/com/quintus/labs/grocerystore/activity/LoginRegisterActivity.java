@@ -1,6 +1,7 @@
 package com.quintus.labs.grocerystore.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.fragment.Login_Fragment;
 import com.quintus.labs.grocerystore.util.Utils;
+import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 
 /**
  * Grocery App
@@ -28,7 +30,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
         getSupportActionBar().hide();
         fragmentManager = getSupportFragmentManager();
-
+        LocalStorage localStorage = new LocalStorage(getApplicationContext());
+        if (localStorage.isUserLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
             fragmentManager

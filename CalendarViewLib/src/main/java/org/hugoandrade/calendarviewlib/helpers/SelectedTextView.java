@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 
 import org.hugoandrade.calendarviewlib.R;
 
-public class SelectedTextView extends android.support.v7.widget.AppCompatTextView {
+public class SelectedTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private boolean mEnable;
     private int mSelectedColor;

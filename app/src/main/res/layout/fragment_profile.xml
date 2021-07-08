@@ -170,6 +170,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/cardBorderColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <com.quintus.labs.grocerystore.customfonts.MyTextViewSansBold
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chức vụ :" />
+
+                    <com.quintus.labs.grocerystore.customfonts.MyTextViewSansRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:text="Nhân viên"
+                        android:id="@+id/position_profile"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cardBorderColor" />
+
                 <TextView
                     android:id="@+id/openUpdateProfile"
                     android:layout_width="match_parent"

@@ -27,9 +27,9 @@ public class User {
     @SerializedName("photo")
     @Expose
     String photo;
-    @SerializedName("password")
+    @SerializedName("position")
     @Expose
-    String password;
+    String position;
     @SerializedName("access_token")
     @Expose
     String access_token;
@@ -47,7 +47,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", photo='" + photo + '\'' +
-                ", password='" + password + '\'' +
+                ", position='" + position + '\'' +
                 ", access_token='" + access_token + '\'' +
                 '}';
     }
@@ -109,12 +109,12 @@ public class User {
         this.address = address;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getPhoto() {

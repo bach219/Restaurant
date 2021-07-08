@@ -34,7 +34,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.MainActivity;
-import com.quintus.labs.grocerystore.activity.MenuActivity;
 import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.Utils;
@@ -86,6 +85,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     // Initiate Views
     private void initViews() {
+        localStorage = new LocalStorage(getContext());
+        if (localStorage.isUserLoggedIn()) {
+            startActivity(new Intent(getContext(), MainActivity.class));
+        }
         fragmentManager = getActivity().getSupportFragmentManager();
 
         emailid = view.findViewById(R.id.login_emailid);
@@ -277,19 +280,24 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                 getActivity().finish();
                                 getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                             }
-                            if(response.code() == 301)
+                            else if(response.code() == 301)
                                 new CustomToast().Show_Toast(getActivity(), view,
                                         "Địa chỉ Email không tồn tại");
-                            if(response.code() == 401)
+                            else if(response.code() == 401)
                                 new CustomToast().Show_Toast(getActivity(), view,
                                         "Mật khẩu chưa đúng");
 //                            Log.i("test", response.body().toString());
+                            else
+                                new CustomToast().Show_Toast(getActivity(), view,
+                                        "Kết nối với máy chủ bị lỗi");
                         }
 
                         @Override
                         public void onFailure(Call<JsonObject> call, Throwable t) {
                             Log.e("test", call.toString());
                             Log.e("test", t.toString());
+                            new CustomToast().Show_Toast(getActivity(), view,
+                                    "Kết nối với máy chủ bị lỗi");
                             call.cancel();
                         }
                     });
