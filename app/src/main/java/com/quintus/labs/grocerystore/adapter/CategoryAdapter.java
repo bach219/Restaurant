@@ -50,8 +50,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View itemView;
         if (Tag.equalsIgnoreCase("Home")) {
+//            itemView = LayoutInflater.from(parent.getContext())
+//                    .inflate(R.layout.row_home_category, parent, false);
+
             itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.row_home_category, parent, false);
+                    .inflate(R.layout.home_category_item, parent, false);
         } else {
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.row_category, parent, false);
@@ -66,7 +69,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         Category category = categoryList.get(position);
         holder.title.setText(category.getTitle());
-        if (Tag.equalsIgnoreCase("Category")) {
+//        if (Tag.equalsIgnoreCase("Category")) {
             Picasso.get()
                     .load(category.getImage())
                     .into(holder.imageView, new Callback() {
@@ -80,7 +83,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                             Log.d("Error : ", e.getMessage());
                         }
                     });
-        }
+//        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

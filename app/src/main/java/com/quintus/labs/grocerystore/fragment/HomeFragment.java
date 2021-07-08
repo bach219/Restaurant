@@ -90,96 +90,96 @@ public class HomeFragment extends Fragment {
         pRecyclerView.setAdapter(pAdapter);
 
 
-        timer = new Timer();
-        viewPager = view.findViewById(R.id.viewPager);
-
-        sliderDotspanel = view.findViewById(R.id.SliderDots);
-
-        HomeSliderAdapter viewPagerAdapter = new HomeSliderAdapter(getContext(), images);
-
-        viewPager.setAdapter(viewPagerAdapter);
-
-        dotscount = viewPagerAdapter.getCount();
-        dots = new ImageView[dotscount];
-
-        for (int i = 0; i < dotscount; i++) {
-
-            dots[i] = new ImageView(getContext());
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.non_active_dot));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-            params.setMargins(8, 0, 8, 0);
-
-            sliderDotspanel.addView(dots[i], params);
-
-        }
-
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                for (int i = 0; i < dotscount; i++) {
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.non_active_dot));
-                }
-
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        scheduleSlider();
+//        timer = new Timer();
+//        viewPager = view.findViewById(R.id.viewPager);
+//
+//        sliderDotspanel = view.findViewById(R.id.SliderDots);
+//
+//        HomeSliderAdapter viewPagerAdapter = new HomeSliderAdapter(getContext(), images);
+//
+//        viewPager.setAdapter(viewPagerAdapter);
+//
+//        dotscount = viewPagerAdapter.getCount();
+//        dots = new ImageView[dotscount];
+//
+//        for (int i = 0; i < dotscount; i++) {
+//
+//            dots[i] = new ImageView(getContext());
+//            dots[i].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.non_active_dot));
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//            params.setMargins(8, 0, 8, 0);
+//
+//            sliderDotspanel.addView(dots[i], params);
+//
+//        }
+//
+//        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
+//
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//                for (int i = 0; i < dotscount; i++) {
+//                    dots[i].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.non_active_dot));
+//                }
+//
+//                dots[position].setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.active_dot));
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//        scheduleSlider();
 
         return view;
     }
-
-
-    public void scheduleSlider() {
-
-        final Handler handler = new Handler();
-
-        final Runnable update = new Runnable() {
-            public void run() {
-                if (page_position == dotscount) {
-                    page_position = 0;
-                } else {
-                    page_position = page_position + 1;
-                }
-                viewPager.setCurrentItem(page_position, true);
-            }
-        };
-
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, 500, 4000);
-    }
-
-    @Override
-    public void onStop() {
-        timer.cancel();
-        super.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        timer.cancel();
-        super.onPause();
-    }
+//
+//
+//    public void scheduleSlider() {
+//
+//        final Handler handler = new Handler();
+//
+//        final Runnable update = new Runnable() {
+//            public void run() {
+//                if (page_position == dotscount) {
+//                    page_position = 0;
+//                } else {
+//                    page_position = page_position + 1;
+//                }
+//                viewPager.setCurrentItem(page_position, true);
+//            }
+//        };
+//
+//        timer.schedule(new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                handler.post(update);
+//            }
+//        }, 500, 4000);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        timer.cancel();
+//        super.onStop();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        timer.cancel();
+//        super.onPause();
+//    }
 
     public void onLetsClicked(View view) {
         startActivity(new Intent(getContext(), MainActivity.class));
@@ -189,6 +189,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Bach Food");
+        getActivity().setTitle("Thực đơn");
     }
 }
