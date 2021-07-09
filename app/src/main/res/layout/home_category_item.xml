@@ -44,7 +44,7 @@
             android:layout_below="@id/category_image"
             android:singleLine="true"
             android:text="Sushi"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="bottom"
             android:gravity="center_horizontal"

@@ -51,7 +51,7 @@ public class ConfirmFragment extends Fragment {
     RecyclerView.LayoutManager recyclerViewlayoutManager;
     TextView back, placeOrder;
     TextView total, shipping, totalAmount;
-    Double _total, _shipping, _totalAmount;
+    Integer _total, _shipping, _totalAmount;
     ProgressDialog progressDialog;
     List<Order> orderList = new ArrayList<>();
     String orderNo;
@@ -88,7 +88,7 @@ public class ConfirmFragment extends Fragment {
 
 
         _total = ((BaseActivity) getActivity()).getTotalPrice();
-        _shipping = 0.0;
+        _shipping = 0;
         _totalAmount = _total + _shipping;
         total.setText(_total + "");
         shipping.setText(_shipping + "");

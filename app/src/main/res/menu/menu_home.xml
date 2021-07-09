@@ -11,8 +11,8 @@
     <item
         android:id="@+id/action_discover"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
-        android:title="Giỏ hàng"
+        android:icon="@drawable/check"
+        android:title="Điểm danh"
         app:showAsAction="never" />
 
     <item

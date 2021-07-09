@@ -8,11 +8,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/footer_text"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/gradient_bg"
-    android:gravity="bottom"
+    android:layout_height="60dp"
+    android:gravity="center"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:background="@drawable/layout_bg_bottom_right">
 
     <TextView
         android:layout_width="wrap_content"

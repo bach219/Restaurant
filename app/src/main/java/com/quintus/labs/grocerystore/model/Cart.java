@@ -10,9 +10,9 @@ public class Cart {
     String id;
     String image;
     String title;
-    String currency;
+    String currency = "đ";
     String price;
-    String attribute;
+    String unit;
     String quantity;
     String subTotal;
 
@@ -21,13 +21,13 @@ public class Cart {
     }
 
 
-    public Cart(String id, String title, String image, String currency, String price, String attribute, String quantity, String subTotal) {
+    public Cart(String id, String title, String image, String currency, String price, String unit, String quantity, String subTotal) {
         this.id = id;
         this.image = image;
         this.title = title;
-        this.currency = currency;
+        this.currency = "đ";
         this.price = price;
-        this.attribute = attribute;
+        this.unit = unit;
         this.quantity = quantity;
         this.subTotal = subTotal;
     }
@@ -64,12 +64,12 @@ public class Cart {
         this.price = price;
     }
 
-    public String getAttribute() {
-        return attribute;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getQuantity() {
@@ -89,10 +89,10 @@ public class Cart {
     }
 
     public String getCurrency() {
-        return currency;
+        return "đ";
     }
 
     public void setCurrency(String currency) {
-        this.currency = currency;
+        this.currency = "đ";
     }
 }

@@ -37,8 +37,8 @@ import java.util.List;
 public class ProductViewActivity extends BaseActivity {
     private static int cart_count = 0;
     public TextView quantity, inc, dec;
-    String _id, _title, _image, _description, _price, _currency, _discount, _attribute;
-    TextView id, title, description, price, currency, discount, attribute;
+    String _id, _title, _image, _description, _price, _currency, _discount, _unit;
+    TextView id, title, description, price, currency, discount, unit;
     ImageView imageView;
     ProgressBar progressBar;
     LinearLayout addToCart, share;
@@ -62,8 +62,9 @@ public class ProductViewActivity extends BaseActivity {
         _price = intent.getStringExtra("price");
         _currency = intent.getStringExtra("currency");
         _discount = intent.getStringExtra("discount");
-        _attribute = intent.getStringExtra("attribute");
+        _unit = intent.getStringExtra("unit");
 
+//        Log.d("ahihihihi", _id + _title + _image + _description + _price + _currency + _discount + _unit);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
         changeActionBarTitle(getSupportActionBar());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -78,7 +79,7 @@ public class ProductViewActivity extends BaseActivity {
         description = findViewById(R.id.apv_description);
         currency = findViewById(R.id.apv_currency);
         price = findViewById(R.id.apv_price);
-        attribute = findViewById(R.id.apv_attribute);
+        unit = findViewById(R.id.apv_unit);
         discount = findViewById(R.id.apv_discount);
         imageView = findViewById(R.id.apv_image);
         progressBar = findViewById(R.id.progressbar);
@@ -94,13 +95,14 @@ public class ProductViewActivity extends BaseActivity {
         description.setText(_description);
         price.setText(_price);
         currency.setText(_currency);
-        attribute.setText(_attribute);
+        unit.setText(_unit);
         discount.setText(_discount);
         Log.d(TAG, "Discount : " + _discount);
         if (_discount != null || _discount.length() != 0 || _discount != "") {
             discount.setVisibility(View.VISIBLE);
         } else {
-            discount.setVisibility(View.GONE);
+//            discount.setVisibility(View.GONE);
+            discount.setVisibility(View.INVISIBLE);
         }
         if (_image != null) {
             Picasso.get().load(_image).error(R.drawable.no_image).into(imageView, new Callback() {
@@ -132,7 +134,7 @@ public class ProductViewActivity extends BaseActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userEntry = _image + "\n" + _title + "\n" + _description + "\n" + _attribute + "-" + _currency + _price + "(" + _discount + ")";
+                String userEntry = _image + "\n" + _title + "\n" + _description + "\n" + _unit + "-" + _currency + _price + "(" + _discount + ")";
 
                 Intent textShareIntent = new Intent(Intent.ACTION_SEND);
                 textShareIntent.putExtra(Intent.EXTRA_TEXT, userEntry);
@@ -147,10 +149,10 @@ public class ProductViewActivity extends BaseActivity {
             public void onClick(View view) {
                 _price = price.getText().toString();
 
-                cart = new Cart(_id, _title, _image, _currency, _price, _attribute, "1", _price);
+                cart = new Cart(_id, _title, _image, _currency, _price, _unit, "1", _price);
                 cartList.add(cart);
                 String cartStr = gson.toJson(cartList);
-                //Log.d("CART", cartStr);
+                Log.d("CART", cartStr);
                 localStorage.setCart(cartStr);
                 onAddProduct();
                 addToCart.setVisibility(View.GONE);
@@ -170,13 +172,13 @@ public class ProductViewActivity extends BaseActivity {
                 total_item++;
                 Log.d("totalItem", total_item + "");
                 quantity.setText(total_item + "");
-                String subTotal = String.valueOf(Double.parseDouble(_price) * total_item);
+                String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
                 cartList.get(cartId).setQuantity(quantity.getText().toString());
                 cartList.get(cartId).setSubTotal(subTotal);
-                cartList.get(cartId).setAttribute(attribute.getText().toString());
+                cartList.get(cartId).setUnit(unit.getText().toString());
                 cartList.get(cartId).setPrice(_price);
                 String cartStr = gson.toJson(cartList);
-                //Log.d("CART", cartStr);
+//                Log.d("CART", cartStr);
                 localStorage.setCart(cartStr);
             }
         });
@@ -192,15 +194,15 @@ public class ProductViewActivity extends BaseActivity {
                     total_item--;
                     quantity.setText(total_item + "");
                     Log.d("totalItem", total_item + "");
-                    String subTotal = String.valueOf(Double.parseDouble(_price) * total_item);
+                    String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
 
 
                     cartList.get(cartId).setQuantity(quantity.getText().toString());
                     cartList.get(cartId).setSubTotal(subTotal);
-                    cartList.get(cartId).setAttribute(attribute.getText().toString());
+                    cartList.get(cartId).setUnit(unit.getText().toString());
                     cartList.get(cartId).setPrice(_price);
                     String cartStr = gson.toJson(cartList);
-                    //Log.d("CART", cartStr);
+//                    Log.d("CART", cartStr);
                     localStorage.setCart(cartStr);
                 }
             }

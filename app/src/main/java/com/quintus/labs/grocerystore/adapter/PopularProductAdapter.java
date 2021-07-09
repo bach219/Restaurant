@@ -44,7 +44,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
     LocalStorage localStorage;
     Gson gson;
     List<Cart> cartList = new ArrayList<>();
-    String _quantity, _price, _attribute, _subtotal;
+    String _quantity, _price, _unit, _subtotal;
 
     public PopularProductAdapter(List<Product> productList, Context context) {
         this.productList = productList;
@@ -83,7 +83,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
         holder.title.setText(product.getTitle());
         holder.price.setText(product.getPrice());
-        holder.attribute.setText(product.getAttribute());
+        holder.unit.setText(product.getUnit());
         Picasso.get().load(product.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
@@ -117,11 +117,11 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                 _price = product.getPrice();
                 holder.currency.setText(product.getCurrency());
                 _quantity = holder.quantity.getText().toString();
-                _attribute = product.getAttribute();
-                _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
+                _unit = product.getUnit();
+                _subtotal = String.valueOf(Integer.parseInt(_price) * Integer.parseInt(_quantity));
 
                 if (context instanceof MainActivity) {
-                    Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _attribute, _quantity, _subtotal);
+                    Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _unit, _quantity, _subtotal);
                     cartList = ((BaseActivity) context).getCartList();
                     cartList.add(cart);
 
@@ -145,7 +145,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                         total_item++;
                         Log.d("totalItem", total_item + "");
                         holder.quantity.setText(total_item + "");
-                        _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
+                        _subtotal = String.valueOf(Integer.parseInt(holder.price.getText().toString()) * total_item);
                         cartList.get(i).setQuantity(holder.quantity.getText().toString());
                         cartList.get(i).setSubTotal(_subtotal);
                         String cartStr = gson.toJson(cartList);
@@ -171,7 +171,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                             holder.quantity.setText(total_item + "");
                             Log.d("totalItem", total_item + "");
 
-                            _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
+                            _subtotal = String.valueOf(Integer.parseInt(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
                             String cartStr = gson.toJson(cartList);
@@ -195,7 +195,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                 intent.putExtra("image", product.getImage());
                 intent.putExtra("price", product.getPrice());
                 intent.putExtra("currency", product.getCurrency());
-                intent.putExtra("attribute", product.getAttribute());
+                intent.putExtra("unit", product.getUnit());
                 intent.putExtra("discount", product.getDiscount());
                 intent.putExtra("description", product.getDescription());
 
@@ -222,7 +222,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, attribute, currency, price, shopNow;
+        TextView title, unit, currency, price, shopNow;
         ProgressBar progressBar;
         LinearLayout quantity_ll;
         TextView plus, minus, quantity;
@@ -233,7 +233,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
             imageView = itemView.findViewById(R.id.product_image);
             title = itemView.findViewById(R.id.product_title);
-            attribute = itemView.findViewById(R.id.product_attribute);
+            unit = itemView.findViewById(R.id.product_unit);
             price = itemView.findViewById(R.id.product_price);
             currency = itemView.findViewById(R.id.product_currency);
             shopNow = itemView.findViewById(R.id.shop_now);

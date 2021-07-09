@@ -95,12 +95,12 @@ public class BaseActivity extends AppCompatActivity implements AddorRemoveCallba
         return orderList;
     }
 
-    public Double getTotalPrice() {
+    public Integer getTotalPrice() {
         cartList = getCartList();
-        Double total = 0.0;
+        Integer total = 0;
         if (cartCount() > 0) {
             for (int i = 0; i < cartList.size(); i++) {
-                total = total + Double.valueOf(cartList.get(i).getSubTotal());
+                total = total + Integer.parseInt(cartList.get(i).getSubTotal());
                 Log.d(TAG, "Total :" + total + "");
             }
             Log.d(TAG, "Total :" + total + "");

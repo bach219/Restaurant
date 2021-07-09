@@ -46,7 +46,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="165dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:paddingLeft="10dp"
@@ -57,7 +57,7 @@
 
                     <TextView
                         android:id="@+id/product_price"
-                        android:layout_width="109dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="6.9"
                         android:textColor="@color/colorPrimary"
@@ -66,7 +66,7 @@
 
                     <TextView
                         android:id="@+id/product_currency"
-                        android:layout_width="wrap_content"
+                        android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="3dp"
                         android:text="Rs."
@@ -124,7 +124,7 @@
                         android:textSize="18dp" />
 
                     <TextView
-                        android:id="@+id/product_attribute"
+                        android:id="@+id/product_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"

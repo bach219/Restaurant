@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -23,7 +24,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -39,7 +39,6 @@ import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.retrofit.APIClient;
 import com.quintus.labs.grocerystore.retrofit.APIInterface;
 import com.quintus.labs.grocerystore.retrofit.Host;
-import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 import com.squareup.picasso.Picasso;
 
@@ -84,10 +83,15 @@ public class MainActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.setCustomAnimations(R.anim.slide_to_left, R.anim.slide_from_right);
-        ft.replace(R.id.content_frame, new MenuFragment());
-        ft.commit();
+        String fr_name = getSupportFragmentManager().findFragmentById(R.id.content_frame).getClass().getSimpleName();
+
+        if(!fr_name.equalsIgnoreCase("MenuFragment")){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, new MenuFragment());
+            ft.commit();
+        }else {
+            super.onBackPressed();
+        }
     }
 
 
@@ -230,9 +234,9 @@ public class MainActivity extends BaseActivity
                 fragment = new NewProductFragment();
                 break;
 
-            case R.id.nav_offers:
-//                fragment = new OffrersFragment();
-                break;
+//            case R.id.nav_offers:
+////                fragment = new OffrersFragment();
+//                break;
             case R.id.nav_search:
                 //fragment = new CategoryFragment();
                 break;

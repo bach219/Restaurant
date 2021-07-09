@@ -50,7 +50,7 @@ public class PaymentFragment extends Fragment {
         cardFrame = view.findViewById(R.id.card_frame);
         payll = view.findViewById(R.id.pay_ll);
         pay = view.findViewById(R.id.total_pay);
-        Double amount = ((BaseActivity) getActivity()).getTotalPrice();
+        Integer amount = ((BaseActivity) getActivity()).getTotalPrice();
         pay.append(amount + "");
 
         payll.setOnClickListener(new View.OnClickListener() {

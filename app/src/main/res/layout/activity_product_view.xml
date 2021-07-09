@@ -6,16 +6,13 @@
    * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
    -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f2f2">
+    android:background="#fff">
 
     <ScrollView
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="49dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,17 +99,18 @@
                             android:id="@+id/apv_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="2dp"
+                            android:layout_width="10dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_weight="2"
                             android:text="750"
                             android:textColor="@color/colorTex"
                             android:textSize="21dp" />
                         <com.quintus.labs.grocerystore.customfonts.MyTextView
                             android:id="@+id/apv_currency"
-                            android:layout_width="57dp"
+                            android:layout_width="15dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="VNĐ"
+                            android:text="đ"
                             android:textColor="@color/colorTex"
                             android:textSize="21dp" />
 
@@ -196,7 +194,7 @@
                         android:textColor="@color/colorSub" />
 
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/apv_attribute"
+                        android:id="@+id/apv_unit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
@@ -364,9 +362,9 @@
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="11dp"
                             android:background="@drawable/shop_button_bg"
                             android:orientation="horizontal">
 
@@ -470,7 +468,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="bottom"
-                            android:src="@drawable/icon2"
+                            android:src="@drawable/ic_arrow_back_black_24dp"
 
                             />
 
@@ -480,8 +478,8 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Chia sẻ"
-                            android:textColor="#4c71f5"
+                            android:text="Đặt tiếp"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="12dp" />
 
                     </LinearLayout>
@@ -505,18 +503,18 @@
     </ScrollView>
 
 
-    <!--****buy****-->
-    <com.quintus.labs.grocerystore.customfonts.MyTextView
-        android:id="@+id/buy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="Đặt ngay"
-        android:textColor="#fff"
-        android:textSize="16dp" />
+<!--    &lt;!&ndash;****buy****&ndash;&gt;-->
+<!--    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--        android:id="@+id/buy"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="16dp"-->
+<!--        android:text="Đặt ngay"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textSize="16dp" />-->
 </RelativeLayout>
 
 

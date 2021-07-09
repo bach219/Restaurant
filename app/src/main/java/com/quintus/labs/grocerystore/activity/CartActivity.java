@@ -67,7 +67,7 @@ public class CartActivity extends BaseActivity {
         emptyCart = findViewById(R.id.empty_cart_img);
         checkoutLL = findViewById(R.id.checkout_LL);
         totalPrice = findViewById(R.id.total_price);
-        totalPrice.setText(getTotalPrice() + " VNĐ. ");
+        totalPrice.setText(getTotalPrice() + " đ");
         setUpCartRecyclerview();
 
 
@@ -119,11 +119,11 @@ public class CartActivity extends BaseActivity {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
 
                 //set message, title, and icon
-                .setTitle("Delete")
-                .setMessage("Do you want to Delete")
+                .setTitle("Xóa")
+                .setMessage("Bạn chắc chắn muốn xóa")
                 .setIcon(R.drawable.ic_delete_black_24dp)
 
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         localStorage.deleteCart();
@@ -136,7 +136,7 @@ public class CartActivity extends BaseActivity {
 
                 })
 
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
@@ -200,7 +200,7 @@ public class CartActivity extends BaseActivity {
     @Override
     public void updateTotalPrice() {
 
-        totalPrice.setText("Rs. " + getTotalPrice() + "");
+        totalPrice.setText(getTotalPrice() + "đ");
         if (getTotalPrice() == 0.0) {
             mState = "HIDE_MENU";
             invalidateOptionsMenu();

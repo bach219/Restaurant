@@ -69,7 +69,7 @@ public class ProductActivity extends BaseActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setTypeface(null, Typeface.BOLD);
         // Set text to display in TextView
-        tv.setText("Products"); // ActionBar title text
+        tv.setText("Danh sách món"); // ActionBar title text
         tv.setTextSize(20);
 
         // Set the text color of TextView to red

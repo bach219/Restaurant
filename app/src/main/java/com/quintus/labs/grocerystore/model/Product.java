@@ -11,8 +11,8 @@ public class Product {
     String categoryId;
     String title;
     String description;
-    String attribute;
-    String currency;
+    String unit;
+    String currency = "đ";
     String price;
     String discount;
     String image;
@@ -20,28 +20,28 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String categoryId, String title, String description, String attribute, String price, String discount, String image) {
+    public Product(String id, String categoryId, String title, String description, String unit, String price, String discount, String image) {
         this.id = id;
         this.categoryId = categoryId;
         this.title = title;
         this.description = description;
-        this.attribute = attribute;
+        this.unit = unit;
         this.price = price;
         this.discount = discount;
         this.image = image;
     }
-
-    public Product(String id, String categoryId, String title, String description, String attribute, String currency, String price, String discount, String image) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.title = title;
-        this.description = description;
-        this.attribute = attribute;
-        this.currency = currency;
-        this.price = price;
-        this.discount = discount;
-        this.image = image;
-    }
+//
+//    public Product(String id, String categoryId, String title, String description, String attribute, String currency, String price, String discount, String image) {
+//        this.id = id;
+//        this.categoryId = categoryId;
+//        this.title = title;
+//        this.description = description;
+//        this.attribute = attribute;
+//        this.currency = "đ";
+//        this.price = price;
+//        this.discount = discount;
+//        this.image = image;
+//    }
 
     public String getId() {
         return id;
@@ -75,12 +75,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getAttribute() {
-        return attribute;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getPrice() {
@@ -108,10 +108,10 @@ public class Product {
     }
 
     public String getCurrency() {
-        return currency;
+        return "đ";
     }
 
     public void setCurrency(String currency) {
-        this.currency = currency;
+        this.currency = "đ";
     }
 }

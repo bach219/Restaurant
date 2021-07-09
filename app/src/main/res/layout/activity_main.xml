@@ -20,15 +20,17 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/activity_main_drawer">
+        app:menu="@menu/activity_main_drawer"
+        android:background="@drawable/layout_bg"
+        android:layout_marginTop="15dp">
 
         <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fillViewport="true"
             android:scrollbars="vertical">
 
@@ -39,20 +41,14 @@
 
                 <com.google.android.material.navigation.NavigationView
                     android:id="@+id/nav_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/NavigationView"
                     app:elevation="0dp"
                     app:headerLayout="@layout/nav_header_main"
-                    app:menu="@menu/activity_main_drawer">
+                    app:menu="@menu/activity_main_drawer"
+                    android:background="@drawable/layout_bg_no_color">
                     ></com.google.android.material.navigation.NavigationView>
-
-                <LinearLayout
-                    android:id="@+id/spacer_to_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical" />
 
                 <include layout="@layout/nav_footer_main"></include>
             </LinearLayout>

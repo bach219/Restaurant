@@ -226,7 +226,7 @@
                     android:layout_weight="1"
                     android:text="Nhóm món"
                     android:textSize="22sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorPrimary"
                     android:layout_marginLeft="14dp" />
 
                 <TextView
@@ -237,7 +237,7 @@
                     android:text="Xem tất"
                     android:textSize="14sp"
                     android:layout_marginRight="22dp"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimaryDark"/>
 
             </LinearLayout>
 
@@ -264,18 +264,18 @@
                     android:layout_weight="1"
                     android:text="Món mới"
                     android:textSize="22sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorPrimary"
                     android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:id="@+id/place_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="22dp"
                     android:gravity="center"
                     android:text="Xem tất"
-                    android:textSize="14sp"
-                    android:layout_marginRight="22dp"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -303,7 +303,7 @@
                     android:layout_weight="1"
                     android:text="Món bán chạy"
                     android:textSize="22sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorPrimary"
                     android:layout_marginLeft="15dp" />
 
                 <TextView
@@ -314,7 +314,7 @@
                     android:text="Xem tất"
                     android:textSize="14sp"
                     android:layout_marginRight="22dp"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimaryDark"/>
 
             </LinearLayout>
 
