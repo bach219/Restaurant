@@ -45,7 +45,7 @@ public class OffrersFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_offer, container, false);
         recyclerView = view.findViewById(R.id.offer_rv);
-        data = new Data();
+        data = Data.getInstance();
         mAdapter = new OfferAdapter(data.getOfferList(), getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);

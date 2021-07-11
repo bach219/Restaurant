@@ -44,6 +44,21 @@
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
+<!--                <TextView-->
+<!--                    android:id="@+id/product_quantity"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:textColor="@color/color_bitter"-->
+<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    android:paddingRight="10dp"-->
+<!--                    android:paddingBottom="5dp"-->
+<!--                    android:text="10 suất"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="bold" />-->
+
 
             </RelativeLayout>
 

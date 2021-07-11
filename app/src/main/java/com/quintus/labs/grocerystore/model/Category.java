@@ -1,5 +1,8 @@
 package com.quintus.labs.grocerystore.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Grocery App
  * https://github.com/quintuslabs/GroceryStore
@@ -7,8 +10,14 @@ package com.quintus.labs.grocerystore.model;
  * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
  */
 public class Category {
+    @SerializedName("id")
+    @Expose
     String id;
+    @SerializedName("title")
+    @Expose
     String title;
+    @SerializedName("image")
+    @Expose
     String image;
 
     public Category() {

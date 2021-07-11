@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.ProductActivity;
 import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -71,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.title.setText(category.getTitle());
 //        if (Tag.equalsIgnoreCase("Category")) {
             Picasso.get()
-                    .load(category.getImage())
+                    .load(Host.host + category.getImage())
                     .into(holder.imageView, new Callback() {
                         @Override
                         public void onSuccess() {

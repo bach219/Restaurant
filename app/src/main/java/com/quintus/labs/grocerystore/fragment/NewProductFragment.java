@@ -39,7 +39,7 @@ public class NewProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new, container, false);
-        data = new Data();
+        data = Data.getInstance();
         nRecyclerView = view.findViewById(R.id.new_product_rv);
         pAdapter = new NewProductAdapter(data.getNewList(), getContext(), "new");
         RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext());

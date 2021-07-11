@@ -7,12 +7,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -20,10 +22,29 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.adapter.ProductAdapter;
 import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.helper.Data;
+import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.model.Product;
+import com.quintus.labs.grocerystore.retrofit.APIClient;
+import com.quintus.labs.grocerystore.retrofit.APIInterface;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Grocery App
@@ -53,7 +74,7 @@ public class ProductActivity extends BaseActivity {
 
         cart_count = cartCount();
         recyclerView = findViewById(R.id.product_rv);
-        data = new Data();
+        data = Data.getInstance();
         setUpRecyclerView();
 
     }
@@ -83,22 +104,66 @@ public class ProductActivity extends BaseActivity {
     }
 
     private void setUpRecyclerView() {
-        data = new Data();
-        mAdapter = new ProductAdapter(data.getProductList(), ProductActivity.this, Tag);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+//        data = new Data();
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<List<Product>> callUser = apiInterface.doGetProductList();
+        callUser.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if(response.code() == 200) {
+
+
+                    mAdapter = new ProductAdapter(response.body(), ProductActivity.this, Tag);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+                }
+                else
+                    Toast.makeText(ProductActivity.this, "Xảy ra lỗi trạng thái server" + response.body().toString(), Toast.LENGTH_LONG).show();
+
+                }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                Log.d("test pro activity onFailure call: ", call.toString());
+                Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                Toast.makeText(ProductActivity.this, "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
 
     }
 
     private void setUpGridRecyclerView() {
-        data = new Data();
-        mAdapter = new ProductAdapter(data.getProductList(), ProductActivity.this, Tag);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<List<Product>> callUser = apiInterface.doGetProductList();
+        callUser.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if(response.code() == 200){
+                    mAdapter = new ProductAdapter(response.body(), ProductActivity.this, Tag);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+                }
+                else
+                    Toast.makeText(ProductActivity.this, "Xảy ra lỗi trạng thái server", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                Log.d("test pro activity onFailure call: ", call.toString());
+                Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                Toast.makeText(ProductActivity.this, "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
 
     }
 

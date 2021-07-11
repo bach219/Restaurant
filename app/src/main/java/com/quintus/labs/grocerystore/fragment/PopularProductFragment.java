@@ -39,7 +39,7 @@ public class PopularProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_popular, container, false);
-        data = new Data();
+        data = Data.getInstance();
         pRecyclerView = view.findViewById(R.id.popular_product_rv);
         pAdapter = new PopularProductAdapter(data.getPopularList(), getContext(), "pop");
         RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext());

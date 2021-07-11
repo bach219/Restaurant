@@ -23,6 +23,7 @@ import com.quintus.labs.grocerystore.activity.ProductViewActivity;
 import com.quintus.labs.grocerystore.interfaces.AddorRemoveCallbacks;
 import com.quintus.labs.grocerystore.model.Cart;
 import com.quintus.labs.grocerystore.model.Product;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -86,7 +87,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
         holder.price.setText(product.getPrice());
         holder.currency.setText(product.getCurrency());
         holder.unit.setText(product.getUnit());
-        Picasso.get().load(product.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
+        Picasso.get().load(Host.host + product.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);

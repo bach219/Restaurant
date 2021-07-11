@@ -3,7 +3,14 @@ package com.quintus.labs.grocerystore.retrofit;
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
+import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.model.Product;
 import com.quintus.labs.grocerystore.model.User;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -47,4 +54,15 @@ public interface APIInterface {
 
     @POST("/api/auth/employee/logout")
     Call<JsonObject> logout(@Header("Authorization") String token);
+
+
+    //Category
+    @GET("/api/getListCategory")
+    Call<List<Category>> doGetCategoryList();
+
+    //Product
+    @GET("/api/getListProduct")
+    Call<List<Product>> doGetProductList();
+
+
 }

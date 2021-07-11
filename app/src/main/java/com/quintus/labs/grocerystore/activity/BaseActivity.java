@@ -74,7 +74,7 @@ public class BaseActivity extends AppCompatActivity implements AddorRemoveCallba
     public List<Cart> getCartList() {
         if (localStorage.getCart() != null) {
             String jsonCart = localStorage.getCart();
-            //Log.d("CART : ", jsonCart);
+            Log.d("CART getCartList: ", jsonCart);
             Type type = new TypeToken<List<Cart>>() {
             }.getType();
             cartList = gson.fromJson(jsonCart, type);

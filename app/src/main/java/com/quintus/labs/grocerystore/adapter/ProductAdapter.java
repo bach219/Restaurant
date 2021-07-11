@@ -24,6 +24,7 @@ import com.quintus.labs.grocerystore.activity.ProductViewActivity;
 import com.quintus.labs.grocerystore.interfaces.AddorRemoveCallbacks;
 import com.quintus.labs.grocerystore.model.Cart;
 import com.quintus.labs.grocerystore.model.Product;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -88,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.currency.setText(product.getCurrency());
         holder.price.setText(product.getPrice());
         Picasso.get()
-                .load(product.getImage())
+                .load(Host.host + product.getImage())
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {

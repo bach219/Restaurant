@@ -4,11 +4,13 @@ package com.quintus.labs.grocerystore.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.MainActivity;
 import com.quintus.labs.grocerystore.adapter.CategoryAdapter;
@@ -26,11 +31,22 @@ import com.quintus.labs.grocerystore.adapter.NewProductAdapter;
 import com.quintus.labs.grocerystore.adapter.PopularProductAdapter;
 import com.quintus.labs.grocerystore.helper.Data;
 import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.model.Product;
+import com.quintus.labs.grocerystore.retrofit.APIClient;
+import com.quintus.labs.grocerystore.retrofit.APIInterface;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 /**
  * Grocery App
  * https://github.com/quintuslabs/GroceryStore
@@ -49,7 +65,7 @@ public class HomeFragment extends Fragment {
     Data data;
     private int dotscount;
     private ImageView[] dots;
-    private List<Category> categoryList = new ArrayList<>();
+//    private List<Category> categoryList = new ArrayList<>();
     private RecyclerView recyclerView, nRecyclerView, pRecyclerView;
     private CategoryAdapter mAdapter;
     private NewProductAdapter nAdapter;
@@ -61,33 +77,107 @@ public class HomeFragment extends Fragment {
     }
 
 
+    List<Category> categoryList = new ArrayList<>();
+    List<Product> newList =new ArrayList<>();
+    List<Product> popularList =new ArrayList<>();
+    View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        data = new Data();
-        recyclerView = view.findViewById(R.id.category_rv);
-        pRecyclerView = view.findViewById(R.id.popular_product_rv);
-        nRecyclerView = view.findViewById(R.id.new_product_rv);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        data = Data.getInstance();
+//        data.setCategoryList(categoryList);
+//        data.setNewList(newList);
+//        data.setPopularList(popularList);
 
-        mAdapter = new CategoryAdapter(data.getCategoryList(), getContext(), "Home");
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<List<Product>> callProduct = apiInterface.doGetProductList();
+        callProduct.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if(response.code() == 200) {
+                    pRecyclerView = view.findViewById(R.id.popular_product_rv);
+                    nRecyclerView = view.findViewById(R.id.new_product_rv);
+                    pAdapter = new PopularProductAdapter(response.body(), getContext(), "Home");
+                    RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    pRecyclerView.setLayoutManager(pLayoutManager);
+                    pRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                    pRecyclerView.setAdapter(pAdapter);
+                    nAdapter = new NewProductAdapter(response.body(), getContext(), "Home");
+                    RecyclerView.LayoutManager nLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    nRecyclerView.setLayoutManager(nLayoutManager);
+                    nRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                    nRecyclerView.setAdapter(nAdapter);
 
-        nAdapter = new NewProductAdapter(data.getNewList(), getContext(), "Home");
-        RecyclerView.LayoutManager nLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        nRecyclerView.setLayoutManager(nLayoutManager);
-        nRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        nRecyclerView.setAdapter(nAdapter);
+                }
+                else
+                    Toast.makeText(getActivity(), "Xảy ra lỗi trạng thái server" + response.body().toString(), Toast.LENGTH_LONG).show();
 
-        pAdapter = new PopularProductAdapter(data.getPopularList(), getContext(), "Home");
-        RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        pRecyclerView.setLayoutManager(pLayoutManager);
-        pRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        pRecyclerView.setAdapter(pAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                Log.d("test pro activity onFailure call: ", call.toString());
+                Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                Toast.makeText(getActivity(), "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+
+
+        Call<List<Category>> callCategory = apiInterface.doGetCategoryList();
+        callCategory.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if(response.code() == 200) {
+                    recyclerView = view.findViewById(R.id.category_rv);
+                    mAdapter = new CategoryAdapter(response.body(), getContext(), "Home");
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+                }
+                else
+                    Toast.makeText(getActivity(), "Xảy ra lỗi trạng thái server" + response.body().toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+                Log.d("test pro activity onFailure call: ", call.toString());
+                Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                Toast.makeText(getActivity(), "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+
+//        recyclerView = view.findViewById(R.id.category_rv);
+//        pRecyclerView = view.findViewById(R.id.popular_product_rv);
+//        nRecyclerView = view.findViewById(R.id.new_product_rv);
+////
+//        mAdapter = new CategoryAdapter(categoryList, getContext(), "Home");
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
+////
+//        nAdapter = new NewProductAdapter(newList, getContext(), "Home");
+//        RecyclerView.LayoutManager nLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        nRecyclerView.setLayoutManager(nLayoutManager);
+//        nRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        nRecyclerView.setAdapter(nAdapter);
+//
+//        pAdapter = new PopularProductAdapter(popularList, getContext(), "Home");
+//        RecyclerView.LayoutManager pLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        pRecyclerView.setLayoutManager(pLayoutManager);
+//        pRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        pRecyclerView.setAdapter(pAdapter);
 
         return view;
     }

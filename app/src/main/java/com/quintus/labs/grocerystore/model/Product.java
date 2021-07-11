@@ -1,5 +1,8 @@
 package com.quintus.labs.grocerystore.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Grocery App
  * https://github.com/quintuslabs/GroceryStore
@@ -7,15 +10,56 @@ package com.quintus.labs.grocerystore.model;
  * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
  */
 public class Product {
+    @SerializedName("id")
+    @Expose
     String id;
+    @SerializedName("categoryId")
+    @Expose
     String categoryId;
+    @SerializedName("title")
+    @Expose
     String title;
+    @SerializedName("description")
+    @Expose
     String description;
+    @SerializedName("unit")
+    @Expose
     String unit;
+
     String currency = "đ";
+
+    @SerializedName("price")
+    @Expose
     String price;
+    @SerializedName("discount")
+    @Expose
     String discount;
+    @SerializedName("image")
+    @Expose
     String image;
+    @SerializedName("quantity")
+    @Expose
+    String quantity;
+    @SerializedName("note")
+    @Expose
+    String note;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", categoryId='" + categoryId + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", unit='" + unit + '\'' +
+                ", currency='" + currency + '\'' +
+                ", price='" + price + '\'' +
+                ", discount='" + discount + '\'' +
+                ", image='" + image + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 
     public Product() {
     }
@@ -30,7 +74,33 @@ public class Product {
         this.discount = discount;
         this.image = image;
     }
-//
+
+    public Product(String id, String categoryId, String title, String description, String unit, String currency, String price, String discount, String image, String quantity, String note) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.title = title;
+        this.description = description;
+        this.unit = unit;
+        this.currency = currency;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.quantity = quantity;
+        this.note = note;
+    }
+
+    //    public Product(String id, String categoryId, String title, String unit, String price, String discount, String image, String quantity) {
+//        this.id = id;
+//        this.categoryId = categoryId;
+//        this.title = title;
+//        this.unit = unit;
+//        this.price = price;
+//        this.discount = discount;
+//        this.image = image;
+//        this.quantity = quantity;
+//    }
+
+    //
 //    public Product(String id, String categoryId, String title, String description, String attribute, String currency, String price, String discount, String image) {
 //        this.id = id;
 //        this.categoryId = categoryId;
@@ -113,5 +183,21 @@ public class Product {
 
     public void setCurrency(String currency) {
         this.currency = "đ";
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
