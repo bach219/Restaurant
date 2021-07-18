@@ -16,17 +16,27 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.model.Cart;
+import com.quintus.labs.grocerystore.model.Product;
+import com.quintus.labs.grocerystore.retrofit.APIClient;
+import com.quintus.labs.grocerystore.retrofit.APIInterface;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Grocery App
@@ -37,8 +47,8 @@ import java.util.List;
 public class ProductViewActivity extends BaseActivity {
     private static int cart_count = 0;
     public TextView quantity, inc, dec;
-    String _id, _title, _image, _description, _price, _currency, _discount, _unit;
-    TextView id, title, description, price, currency, discount, unit;
+    String _id, _title, _image, _description, _price, _currency, _discount, _unit, _qty;
+    TextView id, title, description, price, currency, discount, unit, qty;
     ImageView imageView;
     ProgressBar progressBar;
     LinearLayout addToCart, share;
@@ -56,159 +66,196 @@ public class ProductViewActivity extends BaseActivity {
         Intent intent = getIntent();
 
         _id = intent.getStringExtra("id");
-        _title = intent.getStringExtra("title");
-        _image = intent.getStringExtra("image");
-        _description = intent.getStringExtra("description");
-        _price = intent.getStringExtra("price");
-        _currency = intent.getStringExtra("currency");
-        _discount = intent.getStringExtra("discount");
-        _unit = intent.getStringExtra("unit");
+//        _title = intent.getStringExtra("title");
+//        _image = intent.getStringExtra("image");
+//        _description = intent.getStringExtra("description");
+//        _price = intent.getStringExtra("price");
+//        _currency = intent.getStringExtra("currency");
+//        _discount = intent.getStringExtra("discount");
+//        _unit = intent.getStringExtra("unit");
 
-//        Log.d("ahihihihi", _id + _title + _image + _description + _price + _currency + _discount + _unit);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
-        changeActionBarTitle(getSupportActionBar());
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
-        //upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<JsonObject> callProduct = apiInterface.getProductDetail(_id);
+        callProduct.enqueue(new retrofit2.Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.code() == 200) {
+                    String jsonString = response.body().toString();
+                    final Gson gson = new Gson();
+                    Product product = gson.fromJson(jsonString, Product.class);
 
-        cart_count = cartCount();
+                    _title = product.getTitle();
+                    _image = product.getImage();
+                    _description = product.getDescription();
+                    _price = product.getPrice();
+                    _currency = product.getCurrency();
+                    _discount = product.getDiscount();
+                    _unit = product.getUnit();
+                    _qty = product.getQuantity();
+                    _description = product.getDescription();
 
-        title = findViewById(R.id.apv_title);
-        description = findViewById(R.id.apv_description);
-        currency = findViewById(R.id.apv_currency);
-        price = findViewById(R.id.apv_price);
-        unit = findViewById(R.id.apv_unit);
-        discount = findViewById(R.id.apv_discount);
-        imageView = findViewById(R.id.apv_image);
-        progressBar = findViewById(R.id.progressbar);
-        addToCart = findViewById(R.id.add_to_cart_ll);
-        share = findViewById(R.id.apv_share);
-        quantityLL = findViewById(R.id.quantity_rl);
-        quantity = findViewById(R.id.quantity);
-        inc = findViewById(R.id.quantity_plus);
-        dec = findViewById(R.id.quantity_minus);
 
-        cartList = getCartList();
-        title.setText(_title);
-        description.setText(_description);
-        price.setText(_price);
-        currency.setText(_currency);
-        unit.setText(_unit);
-        discount.setText(_discount);
-        Log.d(TAG, "Discount : " + _discount);
-        if (_discount != null || _discount.length() != 0 || _discount != "") {
-            discount.setVisibility(View.VISIBLE);
-        } else {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+                    changeActionBarTitle(getSupportActionBar());
+                    getSupportActionBar().setDisplayShowHomeEnabled(true);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
+                    //upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
+                    getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+                    cart_count = cartCount();
+
+                    title = findViewById(R.id.apv_title);
+                    qty = findViewById(R.id.apv_qty);
+                    description = findViewById(R.id.apv_description);
+                    currency = findViewById(R.id.apv_currency);
+                    price = findViewById(R.id.apv_price);
+                    unit = findViewById(R.id.apv_unit);
+                    discount = findViewById(R.id.apv_discount);
+                    imageView = findViewById(R.id.apv_image);
+                    progressBar = findViewById(R.id.progressbar);
+                    addToCart = findViewById(R.id.add_to_cart_ll);
+                    share = findViewById(R.id.apv_share);
+                    quantityLL = findViewById(R.id.quantity_rl);
+                    quantity = findViewById(R.id.quantity);
+                    inc = findViewById(R.id.quantity_plus);
+                    dec = findViewById(R.id.quantity_minus);
+
+                    cartList = getCartList();
+                    title.setText(_title);
+                    qty.setText(_qty + " " + _unit);
+                    description.setText(_description);
+                    price.setText(_price);
+                    currency.setText(_currency);
+                    unit.setText(_unit);
+                    discount.setText(_discount);
+                    Log.d(TAG, "Discount : " + _discount);
+                    if (_discount == null || _discount.length() == 0 || _discount == "" || _discount.contains("0")) {
+                        discount.setVisibility(View.INVISIBLE);
+                        discount.setVisibility(View.GONE);
+                    } else {
 //            discount.setVisibility(View.GONE);
-            discount.setVisibility(View.INVISIBLE);
-        }
-        if (_image != null) {
-            Picasso.get().load(_image).error(R.drawable.no_image).into(imageView, new Callback() {
-                @Override
-                public void onSuccess() {
-                    progressBar.setVisibility(View.GONE);
-                }
+                        discount.setVisibility(View.VISIBLE);
+                    }
+                    if (_image != null) {
+                        Picasso.get().load(Host.host + _image).error(R.drawable.no_image).into(imageView, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                progressBar.setVisibility(View.GONE);
+                            }
 
-                @Override
-                public void onError(Exception e) {
-                    progressBar.setVisibility(View.GONE);
-                }
-            });
-        }
+                            @Override
+                            public void onError(Exception e) {
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        });
+                    }
 
-        if (!cartList.isEmpty()) {
-            for (int i = 0; i < cartList.size(); i++) {
-                if (cartList.get(i).getId().equalsIgnoreCase(_id)) {
-                    addToCart.setVisibility(View.GONE);
-                    quantityLL.setVisibility(View.VISIBLE);
-                    quantity.setText(cartList.get(i).getQuantity());
-                    cartId = i;
+                    if (!cartList.isEmpty()) {
+                        for (int i = 0; i < cartList.size(); i++) {
+                            if (cartList.get(i).getId().equalsIgnoreCase(_id)) {
+                                addToCart.setVisibility(View.GONE);
+                                quantityLL.setVisibility(View.VISIBLE);
+                                quantity.setText(cartList.get(i).getQuantity());
+                                cartId = i;
 
-                }
-            }
-        }
-
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String userEntry = _image + "\n" + _title + "\n" + _description + "\n" + _unit + "-" + _currency + _price + "(" + _discount + ")";
-
-                Intent textShareIntent = new Intent(Intent.ACTION_SEND);
-                textShareIntent.putExtra(Intent.EXTRA_TEXT, userEntry);
-                textShareIntent.setType("text/plain");
-                startActivity(textShareIntent);
-            }
-        });
+                            }
+                        }
+                    }
 
 
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _price = price.getText().toString();
+                    share.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String userEntry = _image + "\n" + _title + "\n" + _description + "\n" + _unit + "-" + _currency + _price + "(" + _discount + ")";
 
-                cart = new Cart(_id, _title, _image, _currency, _price, _unit, "1", _price);
-                cartList.add(cart);
-                String cartStr = gson.toJson(cartList);
-                Log.d("CART", cartStr);
-                localStorage.setCart(cartStr);
-                onAddProduct();
-                addToCart.setVisibility(View.GONE);
-                quantityLL.setVisibility(View.VISIBLE);
-            }
-        });
+                            Intent textShareIntent = new Intent(Intent.ACTION_SEND);
+                            textShareIntent.putExtra(Intent.EXTRA_TEXT, userEntry);
+                            textShareIntent.setType("text/plain");
+                            startActivity(textShareIntent);
+                        }
+                    });
 
 
-        inc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _price = price.getText().toString();
+                    addToCart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            _price = price.getText().toString();
+
+                            cart = new Cart(_id, _title, _image, _currency, _price, _unit, "1", _price);
+                            cartList.add(cart);
+                            String cartStr = gson.toJson(cartList);
+                            Log.d("CART", cartStr);
+                            localStorage.setCart(cartStr);
+                            onAddProduct();
+                            addToCart.setVisibility(View.GONE);
+                            quantityLL.setVisibility(View.VISIBLE);
+                        }
+                    });
 
 
-                // int total_item = Integer.parseInt(cartList.get(cartId).getQuantity());
-                int total_item = Integer.parseInt(quantity.getText().toString());
-                total_item++;
-                Log.d("totalItem", total_item + "");
-                quantity.setText(total_item + "");
-                String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
-                cartList.get(cartId).setQuantity(quantity.getText().toString());
-                cartList.get(cartId).setSubTotal(subTotal);
-                cartList.get(cartId).setUnit(unit.getText().toString());
-                cartList.get(cartId).setPrice(_price);
-                String cartStr = gson.toJson(cartList);
+                    inc.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            _price = price.getText().toString();
+
+
+                            // int total_item = Integer.parseInt(cartList.get(cartId).getQuantity());
+                            int total_item = Integer.parseInt(quantity.getText().toString());
+                            total_item++;
+                            Log.d("totalItem", total_item + "");
+                            quantity.setText(total_item + "");
+                            String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
+                            cartList.get(cartId).setQuantity(quantity.getText().toString());
+                            cartList.get(cartId).setSubTotal(subTotal);
+                            cartList.get(cartId).setUnit(unit.getText().toString());
+                            cartList.get(cartId).setPrice(_price);
+                            String cartStr = gson.toJson(cartList);
 //                Log.d("CART", cartStr);
-                localStorage.setCart(cartStr);
-            }
-        });
+                            localStorage.setCart(cartStr);
+                        }
+                    });
 
-        dec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _price = price.getText().toString();
+                    dec.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            _price = price.getText().toString();
 
-                //int total_item = Integer.parseInt(quantity.getText().toString());
-                int total_item = Integer.parseInt(quantity.getText().toString());
-                if (total_item != 1) {
-                    total_item--;
-                    quantity.setText(total_item + "");
-                    Log.d("totalItem", total_item + "");
-                    String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
+                            //int total_item = Integer.parseInt(quantity.getText().toString());
+                            int total_item = Integer.parseInt(quantity.getText().toString());
+                            if (total_item != 1) {
+                                total_item--;
+                                quantity.setText(total_item + "");
+                                Log.d("totalItem", total_item + "");
+                                String subTotal = String.valueOf(Integer.parseInt(_price) * total_item);
 
 
-                    cartList.get(cartId).setQuantity(quantity.getText().toString());
-                    cartList.get(cartId).setSubTotal(subTotal);
-                    cartList.get(cartId).setUnit(unit.getText().toString());
-                    cartList.get(cartId).setPrice(_price);
-                    String cartStr = gson.toJson(cartList);
+                                cartList.get(cartId).setQuantity(quantity.getText().toString());
+                                cartList.get(cartId).setSubTotal(subTotal);
+                                cartList.get(cartId).setUnit(unit.getText().toString());
+                                cartList.get(cartId).setPrice(_price);
+                                String cartStr = gson.toJson(cartList);
 //                    Log.d("CART", cartStr);
-                    localStorage.setCart(cartStr);
+                                localStorage.setCart(cartStr);
+                            }
+                        }
+                    });
                 }
+                else
+                    Toast.makeText(getApplicationContext(), "Xảy ra lỗi trạng thái server" + response.body().toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                Log.d("test pro activity onFailure call: ", call.toString());
+                Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                Toast.makeText(getApplicationContext(), "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                call.cancel();
             }
         });
-
-
     }
 
     private void changeActionBarTitle(ActionBar actionBar) {

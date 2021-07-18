@@ -7,12 +7,16 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,6 +63,11 @@ public class ProductActivity extends BaseActivity {
     ProductAdapter mAdapter;
     String Tag = "List";
     private RecyclerView recyclerView;
+    private List<String> categories,status;
+    private ArrayAdapter categoryAdapter,statusAdapter;
+    private Spinner catSpinner,statusSpinner;
+    private String catergoryString,statusString;
+    private TextView filter;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -76,6 +86,181 @@ public class ProductActivity extends BaseActivity {
         recyclerView = findViewById(R.id.product_rv);
         data = Data.getInstance();
         setUpRecyclerView();
+
+
+
+        Data data = Data.getInstance();
+//        List<String> listCate = data.getCategoryList().stream().map(cate -> cate.getTitle()).collect(Collectors.toList());
+        List<String> listCate = new ArrayList<>();
+        for (Category p : data.getCategoryList()) {
+            listCate.add(p.getTitle());
+        }
+        catSpinner = findViewById(R.id.cat_spinner);
+        statusSpinner = findViewById(R.id.status_spinner);
+        filter = findViewById(R.id.filter);
+        categories = new ArrayList<>();
+        status = new ArrayList<>();
+        categories.add("Loại món");
+        categories.addAll(listCate);
+        status.add("Tình trạng");
+        status.add("Còn hàng");
+        status.add("Hết hàng");
+        categoryAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,categories);
+        statusAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,status);
+        catSpinner.setAdapter(categoryAdapter);
+        statusSpinner.setAdapter(statusAdapter);
+
+
+        catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                catergoryString = (String) parent.getItemAtPosition(position);
+                catSpinner.setSelection(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                catergoryString = "";
+
+            }
+        });
+        statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                statusString = (String) parent.getItemAtPosition(position);
+                statusSpinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                statusString = "";
+
+            }
+        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                Call<List<Product>> callProduct = apiInterface.doGetProductList();
+                callProduct.enqueue(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        if(response.code() == 200) {
+//                            Data data = Data.getInstance();
+                            List<Product> listFilter = new ArrayList<>();
+                            if(catergoryString.equalsIgnoreCase("Loại món") && statusString.equalsIgnoreCase("Tình trạng"))
+                            {
+                                listFilter = response.body();
+                            }
+                            else
+                            {
+                                for(Product product : response.body())
+                                {
+                                    if(catergoryString.equalsIgnoreCase("Loại món") && !TextUtils.isEmpty(statusString))
+                                    {
+                                        if(statusString.equalsIgnoreCase("Còn hàng")){
+                                            if(!product.getQuantity().equalsIgnoreCase("0"))
+                                                listFilter.add(product);
+                                        }else{
+                                            if(product.getQuantity().equalsIgnoreCase("0"))
+                                                listFilter.add(product);
+                                        }
+
+                                    }
+                                    else if(statusString.equals("Tình trạng") && !TextUtils.isEmpty(catergoryString))
+                                    {
+                                        if(product.getCategoryName().equalsIgnoreCase(catergoryString))
+                                            listFilter.add(product);
+                                    }
+                                    else
+                                    {
+                                        if(product.getCategoryName().equalsIgnoreCase(catergoryString) && statusString.equalsIgnoreCase("Còn hàng")){
+                                            if(!product.getQuantity().equalsIgnoreCase("0"))
+                                                listFilter.add(product);
+                                        }
+                                        if(product.getCategoryName().equalsIgnoreCase(catergoryString) && statusString.equalsIgnoreCase("Hết hàng")){
+                                            if(product.getQuantity().equalsIgnoreCase("0"))
+                                                listFilter.add(product);
+                                        }
+
+                                    }
+
+                                }
+                            }
+                            mAdapter = new ProductAdapter(listFilter, ProductActivity.this, Tag);
+                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(mAdapter);
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), "Xảy ra lỗi trạng thái server" + response.body().toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                        Log.d("test pro activity onFailure call: ", call.toString());
+                        Log.d("test pro activity onFailure Throwable: ", t.getMessage());
+
+                        Toast.makeText(getApplicationContext(), "Xảy ra lỗi kết nối server", Toast.LENGTH_LONG).show();
+                        call.cancel();
+                    }
+                });
+
+//                Data data = Data.getInstance();
+//                List<Product> listFilter = new ArrayList<>();
+//                if(catergoryString.equalsIgnoreCase("Loại món") && statusString.equalsIgnoreCase("Tình trạng"))
+//                {
+//                    listFilter = data.getProductList();
+//                }
+//                else
+//                {
+//                    for(Product product : data.getProductList())
+//                    {
+//                        if(catergoryString.equalsIgnoreCase("Loại món") && !TextUtils.isEmpty(statusString))
+//                        {
+//                            if(statusString.equalsIgnoreCase("Còn hàng")){
+//                                if(!product.getQuantity().equalsIgnoreCase("0"))
+//                                    listFilter.add(product);
+//                            }else{
+//                                if(product.getQuantity().equalsIgnoreCase("0"))
+//                                    listFilter.add(product);
+//                            }
+//
+//                        }
+//                        else if(statusString.equals("Tình trạng") && !TextUtils.isEmpty(catergoryString))
+//                        {
+//                            if(product.getCategoryName().equalsIgnoreCase(catergoryString))
+//                                listFilter.add(product);
+//                        }
+//                        else
+//                        {
+//                            if(product.getCategoryName().equalsIgnoreCase(catergoryString) && statusString.equalsIgnoreCase("Còn hàng")){
+//                                if(!product.getQuantity().equalsIgnoreCase("0"))
+//                                    listFilter.add(product);
+//                            }
+//                            if(product.getCategoryName().equalsIgnoreCase(catergoryString) && statusString.equalsIgnoreCase("Hết hàng")){
+//                                if(product.getQuantity().equalsIgnoreCase("0"))
+//                                    listFilter.add(product);
+//                            }
+//
+//                        }
+//
+//                    }
+//                }
+//                mAdapter = new ProductAdapter(listFilter, ProductActivity.this, Tag);
+//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//                recyclerView.setLayoutManager(mLayoutManager);
+//                recyclerView.setItemAnimator(new DefaultItemAnimator());
+//                recyclerView.setAdapter(mAdapter);
+//                mainRecyclerAdapter.setWinnerDetails(w);
+            }
+        });
 
     }
 
@@ -111,7 +296,6 @@ public class ProductActivity extends BaseActivity {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if(response.code() == 200) {
-
 
                     mAdapter = new ProductAdapter(response.body(), ProductActivity.this, Tag);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

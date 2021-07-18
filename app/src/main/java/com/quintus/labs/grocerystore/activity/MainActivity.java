@@ -224,22 +224,22 @@ public class MainActivity extends BaseActivity
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
                 break;
-            case R.id.nav_category:
-                fragment = new CategoryFragment();
-                break;
-            case R.id.nav_popular_products:
-                fragment = new PopularProductFragment();
-                break;
-            case R.id.nav_new_product:
-                fragment = new NewProductFragment();
-                break;
+//            case R.id.nav_category:
+//                fragment = new CategoryFragment();
+//                break;
+//            case R.id.nav_popular_products:
+//                fragment = new PopularProductFragment();
+//                break;
+//            case R.id.nav_new_product:
+//                fragment = new NewProductFragment();
+//                break;
 
 //            case R.id.nav_offers:
 ////                fragment = new OffrersFragment();
 //                break;
-            case R.id.nav_search:
-                //fragment = new CategoryFragment();
-                break;
+//            case R.id.nav_search:
+//                //fragment = new CategoryFragment();
+//                break;
             case R.id.nav_my_order:
                 fragment = new MyOrderFragment();
                 break;

@@ -42,14 +42,46 @@
             android:ellipsize="end"
             tools:text="Exercise Plan" />
 
-        <TextView
-            android:id="@+id/tv_calendar_event_status"
-            android:layout_width="wrap_content"
+<!--        <TextView-->
+<!--            android:id="@+id/tv_calendar_event_status"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:lines="1"-->
+<!--            android:textColor="#979797"-->
+<!--            android:textSize="13sp"-->
+<!--            tools:text="08:00" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#979797"
-            android:textSize="13sp"
-            android:lines="1"
-            tools:text="08:00"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_calendar_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="#979797"
+                android:textSize="13sp"
+                tools:text="08:00" />
+            <TextView
+                android:id="@+id/tv_calendar_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="#979797"
+                android:textSize="13sp"
+                tools:text=" - " />
+            <TextView
+                android:id="@+id/tv_calendar_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="#979797"
+                android:textSize="13sp"
+                tools:text="08:00" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -88,6 +88,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.unit.setText(product.getUnit());
         holder.currency.setText(product.getCurrency());
         holder.price.setText(product.getPrice());
+        holder.unit.setText("1 "+product.getUnit());
+        holder.qty.setText(product.getQuantity()+" "+product.getUnit());
         Picasso.get()
                 .load(Host.host + product.getImage())
                 .into(holder.imageView, new Callback() {
@@ -231,13 +233,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductViewActivity.class);
                 intent.putExtra("id", product.getId());
-                intent.putExtra("title", product.getTitle());
-                intent.putExtra("image", product.getImage());
-                intent.putExtra("price", product.getPrice());
-                intent.putExtra("currency", product.getCurrency());
-                intent.putExtra("unit", product.getUnit());
-                intent.putExtra("discount", product.getDiscount());
-                intent.putExtra("description", product.getDescription());
+//                intent.putExtra("title", product.getTitle());
+//                intent.putExtra("image", product.getImage());
+//                intent.putExtra("price", product.getPrice());
+//                intent.putExtra("currency", product.getCurrency());
+//                intent.putExtra("unit", product.getUnit());
+//                intent.putExtra("discount", product.getDiscount());
+//                intent.putExtra("description", product.getDescription());
 
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -263,7 +265,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         TextView title;
         ProgressBar progressBar;
         CardView cardView;
-        TextView offer, currency, price, quantity, unit, addToCart, subTotal;
+        TextView offer, currency, price, qty, quantity, unit, addToCart, subTotal;
         Button plus, minus;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -276,6 +278,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             offer = itemView.findViewById(R.id.product_discount);
             currency = itemView.findViewById(R.id.product_currency);
             price = itemView.findViewById(R.id.product_price);
+            qty = itemView.findViewById(R.id.product_quantity);
             quantity = itemView.findViewById(R.id.quantity);
             addToCart = itemView.findViewById(R.id.add_to_cart);
             unit = itemView.findViewById(R.id.product_unit);

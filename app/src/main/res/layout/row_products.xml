@@ -139,16 +139,16 @@
                     </LinearLayout>
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/product_quantity"-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:gravity="center"-->
-<!--                        android:lines="2"-->
-<!--                        android:maxLines="2"-->
-<!--                        android:text="50 suất"-->
-<!--                        android:textColor="@color/color_bitter"-->
-<!--                        android:textSize="18dp" />-->
+                    <TextView
+                        android:id="@+id/product_quantity"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="50 suất"
+                        android:textColor="@color/color_bitter"
+                        android:textSize="18dp" />
                 </LinearLayout>
             </LinearLayout>
 

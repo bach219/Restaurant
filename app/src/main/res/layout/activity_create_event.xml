@@ -27,19 +27,22 @@
             <LinearLayout
                 android:id="@+id/ll_header"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal"
-                android:background="?attr/colorPrimary">
+                android:layout_height="80dp"
+                android:background="?attr/colorPrimary"
+                android:orientation="horizontal">
 
                 <TextView
-                    style="@style/createEventToolbarItems"
-                    android:id="@+id/tv_cancel"
-                    android:text="@string/cancel" />
-
-                <TextView
-                    style="@style/createEventToolbarItems"
                     android:id="@+id/tv_save"
-                    android:text="@string/save" />
+                    style="@style/createEventToolbarItems"
+                    android:text="@string/save"
+                    android:textSize="24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    style="@style/createEventToolbarItems"
+                    android:text="@string/cancel"
+                    android:textSize="24dp"/>
+
 
             </LinearLayout>
 
@@ -58,57 +61,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp" >
-
-                    <ImageView
-                        style="@style/createEventIconStyle"
-                        android:src="@drawable/ic_title"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="5.5dp"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp">
-
-                        <EditText
-                            android:id="@+id/et_event_title"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:hint="@string/title"
-                            android:textColor="#252525"
-                            android:paddingStart="6dp"
-                            android:paddingEnd="6dp"
-                            style="@style/createEventItemTextView"/>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardView_event_color"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_margin="8.5dp"
-                            app:cardBackgroundColor="?attr/colorPrimary"
-                            app:cardCornerRadius="2dp"
-                            android:src="@drawable/ic_title"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View style="@style/createEventSeparator"
-                    android:layout_marginStart="57dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="123dp"
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
@@ -116,32 +69,41 @@
 
                     <ImageView
                         style="@style/createEventIconStyle"
-                        android:src="@drawable/ic_check"/>
+                        android:src="@drawable/ic_title"
+                        android:layout_gravity="center_vertical"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
+                        android:layout_height="78dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
                         android:orientation="horizontal"
-                        android:paddingTop="7dp"
-                        android:paddingBottom="6.5dp"
                         android:paddingStart="4dp"
-                        android:paddingEnd="4dp">
+                        android:paddingTop="6dp"
+                        android:paddingEnd="4dp"
+                        android:paddingBottom="5.5dp">
 
-                        <TextView
-                            android:id="@+id/tv_completed"
+                        <EditText
+                            android:id="@+id/et_event_title"
+                            style="@style/createEventItemTextView"
                             android:layout_width="0dp"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="@string/completed"
-                            android:textColor="#252525"
+                            android:hint="Kiểu"
                             android:paddingStart="6dp"
                             android:paddingEnd="6dp"
-                            style="@style/createEventItemTextView"/>
+                            android:textColor="#252525"
+                            android:textSize="24dp"/>
 
-                        <Switch
-                            android:id="@+id/checkbox_completed"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"/>
+                        <!--                        <androidx.cardview.widget.CardView-->
+                        <!--                            android:id="@+id/cardView_event_color"-->
+                        <!--                            android:layout_width="18dp"-->
+                        <!--                            android:layout_height="18dp"-->
+                        <!--                            android:layout_margin="8.5dp"-->
+                        <!--                            app:cardBackgroundColor="?attr/colorPrimary"-->
+                        <!--                            app:cardCornerRadius="2dp"-->
+                        <!--                            android:src="@drawable/ic_title"/>-->
 
                     </LinearLayout>
 
@@ -152,36 +114,87 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="133dp"
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
-                    android:paddingEnd="14dp" >
+                    android:paddingEnd="14dp">
 
                     <ImageView
                         style="@style/createEventIconStyle"
-                        android:src="@drawable/ic_clock"/>
+                        android:src="@drawable/ic_check"
+                        android:layout_gravity="center_vertical" />
 
-                    <TextView
-                        android:id="@+id/tv_date"
-                        style="@style/createEventItemTextView"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="78dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_margin="0dp"
-                        android:background="?selectableItemBackground"
-                        android:textColor="#252525"
-                        android:gravity="end"
-                        android:paddingTop="6.5dp"
-                        android:paddingBottom="6.5dp"
-                        android:paddingEnd="8dp"
-                        android:paddingStart="8dp"
-                        tools:text="tuesday, 27/03   17:00" />
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="4dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="4dp"
+                        android:paddingBottom="5.5dp">
 
+                        <TextView
+                            android:id="@+id/tv_completed"
+                            android:layout_gravity="center_vertical"
+                            style="@style/createEventItemTextView"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingStart="6dp"
+                            android:paddingEnd="6dp"
+                            android:text="Xong ca"
+                            android:textColor="#252525"
+                            android:textSize="24dp"/>
+
+                        <Switch
+                            android:id="@+id/checkbox_completed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="24dp"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <View style="@style/createEventSeparator" />
+                <View style="@style/createEventSeparator"
+                    android:layout_marginStart="57dp"/>
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingStart="14dp"-->
+<!--                    android:paddingEnd="14dp" >-->
+
+<!--                    <ImageView-->
+<!--                        style="@style/createEventIconStyle"-->
+<!--                        android:src="@drawable/ic_clock"/>-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_date"-->
+<!--                        style="@style/createEventItemTextView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_margin="0dp"-->
+<!--                        android:background="?selectableItemBackground"-->
+<!--                        android:textColor="#252525"-->
+<!--                        android:gravity="end"-->
+<!--                        android:paddingTop="6.5dp"-->
+<!--                        android:paddingBottom="6.5dp"-->
+<!--                        android:paddingEnd="8dp"-->
+<!--                        android:paddingStart="8dp"-->
+<!--                        tools:text="tuesday, 27/03   17:00" />-->
+
+
+<!--                </LinearLayout>-->
+
+<!--                <View style="@style/createEventSeparator" />-->
 
 
             </LinearLayout>

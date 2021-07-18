@@ -79,9 +79,9 @@
 
                         <com.quintus.labs.grocerystore.customfonts.MyTextView
                             android:id="@+id/apv_title"
-                            android:layout_width="238dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="iPhone 6Sjkgjkjhahk fhkafhkj"
+                            android:text="iPhone 6Sjkgjkjhahk fhkafhkjiPhone 6Sjkgjkjhahk fhkafhkj"
                             android:textColor="@color/colorTex"
                             android:textSize="21dp"
                             android:visibility="visible" />
@@ -126,17 +126,15 @@
                     android:orientation="horizontal"
                     android:padding="16dp">
 
-<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+                    <com.quintus.labs.grocerystore.customfonts.MyTextView
 
-<!--                        android:id="@+id/free"-->
-<!--                        android:layout_width="110dp"-->
-<!--                        android:layout_height="28dp"-->
-<!--                        android:background="@drawable/rect"-->
-<!--                        android:gravity="center"-->
-<!--                        android:text="Free Shipping"-->
-<!--                        android:textColor="#fff"-->
-
-<!--                        />-->
+                        android:id="@+id/apv_qty"
+                        android:layout_width="110dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/rect"
+                        android:gravity="center"
+                        android:text="50 món"
+                        android:textColor="#fff"/>
 
                     <LinearLayout
 
@@ -218,19 +216,23 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <com.quintus.labs.grocerystore.customfonts.MyTextView
                         android:id="@+id/disc1"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/arrow2"
-                        android:text="Mô tả món"
-                        android:textColor="@color/colorSub"
+                        android:text="Mô tả "
+                        android:textColor="@color/colorSub"/>
 
-                        />
-
+                    <com.quintus.labs.grocerystore.customfonts.MyTextView
+                        android:id="@+id/apv_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="."
+                        android:textColor="@color/colorTex" />
                 </LinearLayout>
 
                 <View
@@ -243,106 +245,106 @@
 
                 <!--*********Est. delivery**********-->
 
-                <LinearLayout
+<!--                <LinearLayout-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginRight="16dp"-->
+<!--                    android:orientation="horizontal">-->
 
 
-                    <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/apv_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorTex" />
+<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--                        android:id="@+id/apv_description"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textColor="@color/colorTex" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <View
+<!--                <View-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colordevider"
-                    android:padding="16dp" />
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/colordevider"-->
+<!--                    android:padding="16dp" />-->
 
 
                 <!--*********Returns**********-->
 
-                <LinearLayout
+<!--                <LinearLayout-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginRight="16dp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/return1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Mô tả"
-                        android:textColor="@color/colorSub" />
+<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--                        android:id="@+id/return1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Mô tả"-->
+<!--                        android:textColor="@color/colorSub" />-->
 
-                    <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/return2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Món ngon"
-                        android:textColor="@color/colorTex" />
+<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--                        android:id="@+id/return2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.5"-->
+<!--                        android:text="Món ngon"-->
+<!--                        android:textColor="@color/colorTex" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/colordevider"
-                    android:padding="16dp" />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@color/colordevider"-->
+<!--                    android:padding="16dp" />-->
 
 
-                <!--*********Guarantee**********-->
+<!--                &lt;!&ndash;*********Guarantee**********&ndash;&gt;-->
 
-                <LinearLayout
+<!--                <LinearLayout-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginRight="16dp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/guarantee1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Đồ ăn kèm"
-                        android:textColor="@color/colorSub" />
+<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--                        android:id="@+id/guarantee1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Đồ ăn kèm"-->
+<!--                        android:textColor="@color/colorSub" />-->
 
-                    <com.quintus.labs.grocerystore.customfonts.MyTextView
-                        android:id="@+id/guarantee2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:drawableRight="@drawable/arrow2"
-                        android:text=""
-                        android:textColor="@color/colorTex"
+<!--                    <com.quintus.labs.grocerystore.customfonts.MyTextView-->
+<!--                        android:id="@+id/guarantee2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.5"-->
+<!--                        android:drawableRight="@drawable/arrow2"-->
+<!--                        android:text=""-->
+<!--                        android:textColor="@color/colorTex"-->
 
-                        />
+<!--                        />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/colordevider"
-                    android:padding="16dp" />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@color/colordevider"-->
+<!--                    android:padding="16dp" />-->
 
 
                 <LinearLayout

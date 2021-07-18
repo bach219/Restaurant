@@ -4,11 +4,16 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.quintus.labs.grocerystore"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -58,8 +63,6 @@ dependencies {
 
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
 
-    // code generator for view
-//    implementation "com.jakewharton:butterknife:10.1.0"
-//    annotationProcessor "com.jakewharton:butterknife-compiler:10.1.0"
+    implementation 'com.github.MrBin99:LaravelEchoAndroid:1.03'
 
 }

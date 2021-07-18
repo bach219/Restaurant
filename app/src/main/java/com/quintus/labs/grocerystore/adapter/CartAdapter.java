@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.CartActivity;
 import com.quintus.labs.grocerystore.model.Cart;
+import com.quintus.labs.grocerystore.retrofit.Host;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -64,7 +65,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         localStorage = new LocalStorage(context);
         gson = new Gson();
         holder.title.setText(cart.getTitle());
-        holder.unit.setText(cart.getUnit());
+        holder.unit.setText("1 " + cart.getUnit());
         _price = cart.getPrice();
         _quantity = cart.getQuantity();
 
@@ -74,7 +75,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         _subtotal = String.valueOf(Integer.parseInt(_price) * Integer.parseInt(_quantity));
         holder.subTotal.setText(_subtotal);
         Picasso.get()
-                .load(cart.getImage())
+                .load(Host.host + cart.getImage())
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {

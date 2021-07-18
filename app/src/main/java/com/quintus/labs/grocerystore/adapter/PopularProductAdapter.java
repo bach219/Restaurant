@@ -84,7 +84,9 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
         holder.title.setText(product.getTitle());
         holder.price.setText(product.getPrice());
-        holder.unit.setText(product.getUnit());
+        holder.currency.setText(product.getCurrency());
+        holder.unit.setText("1 "+product.getUnit());
+//        holder.qty.setText(product.getQuantity()+product.getUnit());
         Picasso.get().load(Host.host + product.getImage()).error(R.drawable.no_image).into(holder.imageView, new Callback() {
             @Override
             public void onSuccess() {
@@ -116,7 +118,6 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
                 holder.shopNow.setVisibility(View.GONE);
                 holder.quantity_ll.setVisibility(View.VISIBLE);
                 _price = product.getPrice();
-                holder.currency.setText(product.getCurrency());
                 _quantity = holder.quantity.getText().toString();
                 _unit = product.getUnit();
                 _subtotal = String.valueOf(Integer.parseInt(_price) * Integer.parseInt(_quantity));
@@ -192,13 +193,13 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductViewActivity.class);
                 intent.putExtra("id", product.getId());
-                intent.putExtra("title", product.getTitle());
-                intent.putExtra("image", product.getImage());
-                intent.putExtra("price", product.getPrice());
-                intent.putExtra("currency", product.getCurrency());
-                intent.putExtra("unit", product.getUnit());
-                intent.putExtra("discount", product.getDiscount());
-                intent.putExtra("description", product.getDescription());
+//                intent.putExtra("title", product.getTitle());
+//                intent.putExtra("image", product.getImage());
+//                intent.putExtra("price", product.getPrice());
+//                intent.putExtra("currency", product.getCurrency());
+//                intent.putExtra("unit", product.getUnit());
+//                intent.putExtra("discount", product.getDiscount());
+//                intent.putExtra("description", product.getDescription());
 
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -223,7 +224,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, unit, currency, price, shopNow;
+        TextView title, unit, currency, price, qty, shopNow;
         ProgressBar progressBar;
         LinearLayout quantity_ll;
         TextView plus, minus, quantity;

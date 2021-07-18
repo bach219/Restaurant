@@ -128,41 +128,41 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        mDateTextView = findViewById(R.id.tv_date);
-        mDateTextView.setText(dateFormat.format(mCalendar.getTime()));
-        mDateTextView.setOnClickListener(new View.OnClickListener() {
+//        mDateTextView = findViewById(R.id.tv_date);
+//        mDateTextView.setText(dateFormat.format(mCalendar.getTime()));
+//        mDateTextView.setOnClickListener(new View.OnClickListener() {
+//
+//            @SuppressLint("RestrictedApi")
+//            @Override
+//            public void onClick(View v) {
+//                Activity context = CreateEventActivity.this;
+//                Intent intent = SelectDateAndTimeActivity.makeIntent(context, mCalendar);
+//
+//                startActivityForResult(intent,
+//                        SET_DATE_AND_TIME_REQUEST_CODE,
+//                        ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+//            }
+//        });
 
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onClick(View v) {
-                Activity context = CreateEventActivity.this;
-                Intent intent = SelectDateAndTimeActivity.makeIntent(context, mCalendar);
-
-                startActivityForResult(intent,
-                        SET_DATE_AND_TIME_REQUEST_CODE,
-                        ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
-            }
-        });
-
-        mColorCardView = findViewById(R.id.cardView_event_color);
-        mColorCardView.setCardBackgroundColor(mColor);
-        mColorCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SelectColorDialog.Builder.instance(CreateEventActivity.this)
-                        .setSelectedColor(mColor)
-                        .setOnColorSelectedListener(new SelectColorDialog.OnColorSelectedListener() {
-                            @Override
-                            public void onColorSelected(int color) {
-                                mColor = color;
-                                mColorCardView.setCardBackgroundColor(mColor);
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-        });
+//        mColorCardView = findViewById(R.id.cardView_event_color);
+//        mColorCardView.setCardBackgroundColor(mColor);
+//        mColorCardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SelectColorDialog.Builder.instance(CreateEventActivity.this)
+//                        .setSelectedColor(mColor)
+//                        .setOnColorSelectedListener(new SelectColorDialog.OnColorSelectedListener() {
+//                            @Override
+//                            public void onColorSelected(int color) {
+//                                mColor = color;
+//                                mColorCardView.setCardBackgroundColor(mColor);
+//                            }
+//                        })
+//                        .create()
+//                        .show();
+//            }
+//        });
         mTitleView = findViewById(R.id.et_event_title);
         mTitleView.setText(mTitle);
         mIsCompleteCheckBox = findViewById(R.id.checkbox_completed);
@@ -199,10 +199,10 @@ public class CreateEventActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_delete: {
-                delete();
-                return true;
-            }
+//            case R.id.action_delete: {
+//                delete();
+//                return true;
+//            }
             case android.R.id.home: {
                 onBackPressed();
                 return true;
@@ -218,12 +218,12 @@ public class CreateEventActivity extends AppCompatActivity {
 
         if (mOriginalEvent == null) {
             mCalendar = extractCalendarFromIntent(getIntent());
-            if (mCalendar == null)
+//            if (mCalendar == null)
                 mCalendar = Calendar.getInstance();
-            mCalendar.set(Calendar.HOUR_OF_DAY, 8);
-            mCalendar.set(Calendar.MINUTE, 0);
-            mCalendar.set(Calendar.SECOND, 0);
-            mCalendar.set(Calendar.MILLISECOND, 0);
+//            mCalendar.set(Calendar.HOUR_OF_DAY, 8);
+//            mCalendar.set(Calendar.MINUTE, 0);
+//            mCalendar.set(Calendar.SECOND, 0);
+//            mCalendar.set(Calendar.MILLISECOND, 0);
             mColor = ColorUtils.mColors[0];
             mTitle = "";
             mIsComplete = false;
@@ -233,7 +233,7 @@ public class CreateEventActivity extends AppCompatActivity {
             mCalendar = mOriginalEvent.getDate();
             mColor = mOriginalEvent.getColor();
             mTitle = mOriginalEvent.getTitle();
-            mIsComplete = mOriginalEvent.isCompleted();
+            mIsComplete = mOriginalEvent.getFinish() == 1 ? true : false;
             isViewMode = true;
         }
     }
@@ -355,16 +355,16 @@ public class CreateEventActivity extends AppCompatActivity {
         }
     }
 
-    private void delete() {
-        Log.e(getClass().getSimpleName(), "delete");
-
-        setResult(RESULT_OK, new Intent()
-                .putExtra(INTENT_EXTRA_ACTION, ACTION_DELETE)
-                .putExtra(INTENT_EXTRA_EVENT, mOriginalEvent));
-        finish();
-        overridePendingTransition(R.anim.stay, R.anim.slide_out_down);
-
-    }
+//    private void delete() {
+//        Log.e(getClass().getSimpleName(), "delete");
+//
+//        setResult(RESULT_OK, new Intent()
+//                .putExtra(INTENT_EXTRA_ACTION, ACTION_DELETE)
+//                .putExtra(INTENT_EXTRA_EVENT, mOriginalEvent));
+//        finish();
+//        overridePendingTransition(R.anim.stay, R.anim.slide_out_down);
+//
+//    }
 
     private void save() {
 

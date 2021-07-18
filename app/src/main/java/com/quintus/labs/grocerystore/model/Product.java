@@ -16,6 +16,9 @@ public class Product {
     @SerializedName("categoryId")
     @Expose
     String categoryId;
+    @SerializedName("categoryName")
+    @Expose
+    String categoryName;
     @SerializedName("title")
     @Expose
     String title;
@@ -123,6 +126,14 @@ public class Product {
 
     public String getCategoryId() {
         return categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public void setCategoryId(String categoryId) {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.model.Event;
 import com.quintus.labs.grocerystore.model.Product;
 import com.quintus.labs.grocerystore.model.User;
 
@@ -64,5 +65,33 @@ public interface APIInterface {
     @GET("/api/getListProduct")
     Call<List<Product>> doGetProductList();
 
+    @GET("/api/getNewList")
+    Call<List<Product>> getNewList();
+
+    @GET("/api/getPopularList")
+    Call<List<Product>> getPopularList();
+
+    @GET("/api/getFilterList")
+    Call<List<Product>> getFilterList(@Field(value = "cate") @NonNull String cate, @Field(value = "status") @NonNull String status);
+
+
+    @FormUrlEncoded
+    @POST("/api/getProductDetail")
+    Call<JsonObject> getProductDetail(@Field(encoded = true, value = "id") @NonNull String id);
+
+
+
+    //Attendance
+    @POST("/api/auth/employee/getAttendanceList")
+    Call<List<Event>> getAttendanceList(@Header("Authorization") String token);
+
+
+    @Headers("Accept: application/json; charset=utf-8")
+    @FormUrlEncoded
+    @POST("/api/auth/employee/attendancein")
+    Call<List<Event>> createAttendanceIn(@Header("Authorization") String token, @Field(value = "type") @NonNull String type);
+
+    @POST("/api/auth/employee/attendanceout")
+    Call<List<Event>> createAttendanceOut(@Header("Authorization") String token);
 
 }

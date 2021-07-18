@@ -2,6 +2,7 @@ package com.quintus.labs.grocerystore.helper;
 
 import com.google.gson.JsonObject;
 import com.quintus.labs.grocerystore.model.Category;
+import com.quintus.labs.grocerystore.model.Event;
 import com.quintus.labs.grocerystore.model.Offer;
 import com.quintus.labs.grocerystore.model.Product;
 import com.quintus.labs.grocerystore.retrofit.APIClient;
@@ -33,6 +34,15 @@ public final class Data {
     private List<Product> newList;
     private List<Product> popularList;
     private List<Offer> offerList;
+    private List<Event> eventList;
+
+    public List<Event> getEventList() {
+        return this.eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 
     public List<Category> getCategoryList() {
         return this.categoryList;

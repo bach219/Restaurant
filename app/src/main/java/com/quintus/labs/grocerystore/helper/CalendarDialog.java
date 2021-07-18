@@ -209,24 +209,24 @@ public class CalendarDialog {
             TextView tvDayOfWeek = view.findViewById(R.id.tv_calendar_day_of_week);
             RecyclerView rvDay = view.findViewById(R.id.rv_calendar_events);
             View rlNoAlerts = view.findViewById(R.id.rl_no_events);
-            View fabCreate = view.findViewById(R.id.fab_create_event);
-
+//            View fabCreate = view.findViewById(R.id.fab_create_event);
+//
             List<Event> eventList = getCalendarEventsOfDay(day);
-
-            if (diffYMD(day, sToday) == -1) {
-                fabCreate.setVisibility(View.INVISIBLE);
-                fabCreate.setOnClickListener(null);
-            }
-            else {
-                fabCreate.setVisibility(View.VISIBLE);
-                fabCreate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mListener != null)
-                            mListener.onCreateEvent(day);
-                    }
-                });
-            }
+//
+//            if (diffYMD(day, sToday) == -1) {
+//                fabCreate.setVisibility(View.INVISIBLE);
+//                fabCreate.setOnClickListener(null);
+//            }
+//            else {
+//                fabCreate.setVisibility(View.VISIBLE);
+//                fabCreate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (mListener != null)
+//                            mListener.onCreateEvent(day);
+//                    }
+//                });
+//            }
 
             tvDay.setText(new SimpleDateFormat("d", Locale.getDefault()).format(day.getTime()));
             tvDayOfWeek.setText(new SimpleDateFormat("EEEE", Locale.getDefault()).format(day.getTime()));
